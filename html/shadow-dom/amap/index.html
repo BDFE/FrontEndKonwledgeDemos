@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, shrink-to-fit=no">
+  <script
+    src="//webapi.amap.com/maps?v=1.4.15&key=899df86dd010c849dd479892c63c7baa&plugin=Map3D,AMap.DistrictSearch"></script>
+  <title> amap component</title>
+  <script src="map.js"></script>
+  <style>
+    .map-wraper {
+      background: red;
+      /* padding: 20px; */
+      width: 400px;
+      height: 300px;
+      display: inline-block;
+      border: 4px solid green;
+    }
+
+    #map {
+      width: 400px;
+      display: inline-block;
+      height: 300px;
+      border: 4px solid green;
+    }
+
+    a-map {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map">
+    my map
+  </div>
+  <div class="map-wraper">
+    <a-map zoom="4.7" viewMode="'3D'" pitch="0" center="[106.346291,37.100257]" showLabel="false"
+      mapStyle="'amap://styles/grey'">
+    </a-map>
+  </div>
+</body>
+<script>
+  this.map = new AMap.Map('map', {
+    zoom: 10,
+    viewMode: '3D',
+    pitch: 0,
+    center: [106.346291, 37.100257],
+    // showLabel: false,
+    // mapStyle: 'amap://styles/grey',
+  });
+</script>
+
+</html>
