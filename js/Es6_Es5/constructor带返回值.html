@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>constructor and return</title>
+</head>
+<body>
+<script>
+    function Person(name,sex)
+    {
+        this.name = name;
+        this.sex = sex;
+        //return 1;
+        //return true;
+        //return "aty";
+        return {"returnValue":11};
+    }
+
+    //new关键字会被认为是创建对象
+    var aObj = new Person("11",1);
+    alert(aObj.returnValue);//11
+    alert(aObj.name);//undefined
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EventEmitter</title>
+</head>
+
+<body>
+    <script>
+        Function.prototype.bind = function (context) {
+            const self = this;
+            let that = arguments[0];
+            let args = Array.prototype.slice.call(arguments, 1);
+            console.log('bind', context, args);
+            return function () {
+                let as = Array.prototype.slice.call(arguments, 0);
+                console.log('return', args, as);
+                return self.apply(that, [].concat(args, as));
+            }
+        }
+
+        function test(a, b, c) {
+            console.log("x=" + this.x, "a=" + a, "b=" + b, "c=" + c);
+        }
+        var o = {
+            x: 1
+        }
+        test.bind(o, 10)(20, 30); //x=1 a=1 b=2 c=3
+    </script>
+</body>
+
+</html>

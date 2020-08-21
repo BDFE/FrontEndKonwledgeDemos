@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>私有变量、公有变量</title>
+</head>
+<body>
+<script>
+    var Parent0 = function () {
+        let name = "daniel"
+        this.age = 24
+        this.hobbies = ["pingpang","basketball","soccer"]
+        this.sayName = function () {
+            console.log(`parent0,${name}`)
+        }
+    }
+    
+    Parent0.prototype.sayAge = function () {
+        console.log(`Parent age :${this.age}`)
+    }
+    var Child = function (sex) {
+        this.sex = sex
+    }
+    Child.prototype = new Parent0()
+
+    var child = new Child("boy")
+    child.hobbies.push("sing")
+    child.sayName()
+    child.sayAge()
+    console.log(child.hobbies)
+    console.log("----------------------------")
+    var parent = new Child()
+    parent.sayName()
+    parent.sayAge()
+    console.log(parent.hobbies)
+
+</script>
+<script>
+    console.log("****************************使用weakmap实现私有属性**************************")
+    var Person = (function() {
+
+        var privateData = new WeakMap();
+
+        function Person(name) {
+            privateData.set(this, { name: name });
+        }
+
+        Person.prototype.getName = function() {
+            return privateData.get(this).name;
+        };
+
+        return Person;
+    }());
+
+    var per1 = new Person("person")
+    console.log(per1.getName())
+    class Student extends Person{
+        constructor(name){
+            super()
+            this.name = name
+
+        }
+    }
+    var stu1 = new Student("kong")
+    console.log(stu1.getName())
+
+</script>
+
+</body>
+</html>

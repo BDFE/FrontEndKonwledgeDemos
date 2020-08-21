@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var events = {}
+    var data = {}
+    class MyClass {
+        on(event, handler) {
+        if(!events[event])
+            events[event] = []
+            events[event].push(handler)
+        }
+        trigger(event, params = []) {
+            let evts = events[event]
+            if(Array.isArray(evts))
+                evts.forEach(callback => {
+                    if(typeof callback === 'function') {
+                        if(Array.isArray(params))
+                            callback.apply(this, params)
+                        else callback.call(this, params)
+                    }
+                })
+        }
+        get(key) { return data[this] && data[this][key] }
+        set(key, value, notify = true) {
+            if(!data[this])
+                data[this] = {}
+            data[this][key] = value
+            if(notify) {
+                this.trigger('change:' + key, value) }
+        }
+        call(factory, ...args) { factory.apply(this, args) }
+    }
+
+    var a = new MyClass()
+    a.on('change:name', value => console.log(value))
+    a.set('name', 'my value')
+</script>
+</body>
+</html>

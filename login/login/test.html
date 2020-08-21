@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>transition</title>
+    <style type="text/css">
+        .box {
+            width: 400px;
+            padding: 15px;
+            background-color: #f0f3f9;
+        }
+
+        .container {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            transition: 1s;
+        }
+
+        .container img {
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <p>想看美女图片？<a href="javascript:" id="button">点击我</a></p>
+    <div id="more" class="container">
+        <img src="http://image.zhangxinxu.com/image/study/s/s256/mm1.jpg" height="191" />
+    </div>
+</body>
+
+
+<script>
+(function() {
+    var eleBtn = document.getElementById("button"),
+        eleMore = document.getElementById("more");
+    
+    var display = true;
+    
+    eleBtn.onclick = function() {
+        display = !display;
+        eleMore.style.left = display? "0px": "-150px"
+        return false;
+    };
+})();
+</script>
+
+</html>

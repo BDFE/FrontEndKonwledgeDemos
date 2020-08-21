@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<HTML>
+<HEAD>
+    <TITLE> New Document </TITLE>
+</HEAD>
+<BODY>
+<script>
+    (function(){
+        var Memoize = function(fn, cache, refetch, obj){
+            cache = cache || {};
+            return function(){
+                var k = arguments[1] ? Array.prototype.join.call(arguments, '__') : arguments[0];
+                if( !(k in cache) && !(refetch && cache[k] == refetch)){
+                    cache[k] = fn.apply(obj || fn, arguments);
+                }
+                return cache[k];
+            }
+        }
+        var test = function(){
+            var t=0,i=0;
+            for(;i<1211110000;i++){
+                t++;
+            }
+            return t;
+        }
+        var test2 = Memoize(test)
+
+        let t0 = new Date()
+        console.log(test2());
+        let t1 = new Date()
+        console.log(t1-t0)
+
+        console.log(test2());
+        let t2 = new Date()
+        console.log(t2-t1);
+
+    })();
+</script></BODY>
+</HTML> 

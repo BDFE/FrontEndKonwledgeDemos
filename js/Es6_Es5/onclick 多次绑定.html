@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>constructor and proxy</title>
+</head>
+<body>
+    <div>
+        <button id="one" onclick='onClick3()' > multi bind onClick </button>
+    </div>
+<script>
+    // 这里的所有 onclick 绑定方式只有最后一个会生效，重复绑定会覆盖
+    var button = document.getElementById('one')
+    button.onclick=()=>{
+        console.log(1)
+    }
+    button.onclick=()=>{
+        console.log(2)
+    }
+    button.onclick=function(){
+        console.log(3)
+    }
+    button.onclick=function(){
+        console.log(4)
+    }
+
+    button.onclick=onClick
+    button.onclick=onClick2
+
+    function onClick(){
+        console.log('c1')
+    }
+    function onClick2(){
+        console.log('c2')
+    }
+    function onClick3(){
+        console.log('c3')
+    }
+</script>
+</body>
+</html>

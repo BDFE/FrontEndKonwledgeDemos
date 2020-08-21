@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #clear-float {
+            background:#ccc;
+            border: 5px solid #f4d320;
+            width: 500px;
+            overflow: hidden;
+            /* 触发BFC布局，计算BFC的高度时，浮动元素也参与计算 */
+        }
+
+        #no-clear-float {
+            background:#ccc;
+            margin-top: 100px;
+            border: 5px solid #f4d320;
+            width: 500px;
+        }
+
+        .child {
+            width: 100px;
+            height: 150px;
+            border: 3px solid #f5b08e;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clear-float">
+        overflow: hidden; 触发BFC布局，计算BFC的高度时，浮动元素也参与计算
+        <div class="child">float left</div>
+        <div class="child">float left</div>
+    </div>
+    <div id="no-clear-float">
+        不清除浮动
+        <div class="child">float left</div>
+        <div class="child">float left</div>
+    </div>
+</body>
+
+</html>

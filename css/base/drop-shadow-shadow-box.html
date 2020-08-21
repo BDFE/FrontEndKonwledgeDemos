@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <style type="text/css">
+        .box-shadow>div,
+        .drop-shadow>div {
+            margin: 10px;
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            border: 1px solid #CCC;
+
+        }
+
+        .box-shadow-1 {
+            border: 3px dashed #beceeb;
+            box-shadow: 5px 5px 10px black;
+        }
+
+        .box-shadow-2 {
+            border: 3px solid #beceeb;
+            box-shadow: inset 5px 5px 10px black;
+        }
+
+        .drop-shadow1 {
+            border: 10px dashed #beceeb;
+            filter: drop-shadow(5px 5px 2px black);
+        }
+
+        .drop-shadow2 {
+            border: 10px dashed #beceeb;
+            filter: drop-shadow(0px 0px 5px black);
+        }
+    </style>
+</head>
+
+<body>
+    <div>--------------box-shadow-------------</div>
+    <div>--------------box-shadow有个超屌的特性，就是阴影可以任意累加-------------</div>
+
+    <div class="box-shadow">
+        <div class="box-shadow-1"></div>
+        <div class="box-shadow-2"></div>
+        <div class="box-shadow-3"></div>
+    </div>
+    <div>--------------drop-shadow-------------</div>
+    <div>--------------drop-shadow才是真正意义上的投影，而box-shadow只是盒阴影而已-------------</div>
+    <div class="drop-shadow">
+        <div class="drop-shadow1"></div>
+        <div class="drop-shadow2"></div>
+        <div class="drop-shadow3"></div>
+    </div>
+</body>
+
+</html>

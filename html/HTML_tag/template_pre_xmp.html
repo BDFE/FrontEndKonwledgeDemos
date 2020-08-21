@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head></head>
+
+<body>
+    <pre>
+            i am pre
+        </pre>
+
+    <xmp>
+        this is daniel
+    </xmp>
+    <i>
+        <span>daniel</span>
+        <span>kong</span>
+    </i>
+    <li>
+
+    </li>
+    <template>
+        <div>daniel</div>
+        <div>kong</div>
+        <div>wentao</div>
+        <img src="http://www.w3school.com.cn/i/eg_tulip.jpg" alt="">
+    </template>
+
+    <script>
+        // template.childNodes是个空大屁。 
+        // 我们可以使用template.innerHTML获取完整的HTML片段。
+        //  如果你非得获取“ 伪子元素” 使用如下方法；
+        // importNode() 方法把一个节点从另一个文档复制到该文档以便应用。
+        let template = document.querySelector('template')
+        let span = document.querySelector('span')
+        console.log('span:', span && span.length);
+        let div = document.querySelector('div')
+        
+        console.log('template 内部div查询不到', div && div.length);
+        let divs = template.content.querySelectorAll("div");
+        console.log('content div', divs);
+        let image_first = template.content.querySelector("img");
+        let dp = window.getComputedStyle(template).display;
+        console.log(image_first, dp);
+
+        var clone = document.importNode(template.content, true);
+        let li = document.querySelector('li')
+        li.appendChild(span)
+        span.appendChild(image_first)
+    </script>
+</body>
+
+</html>

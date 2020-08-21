@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object内部function指针问题</title>
+</head>
+<body>
+<script>
+    var myObject = {
+        foo: "bar",
+         func: function () {
+            var self = this;
+            this.foo ='ccc';
+            console.log("outer func: this.foo = " + this.foo);
+            console.log("outer func: self.foo = " + self.foo);
+            (function () {
+                console.log("inner func: this.foo = " + this.foo);
+                console.log("inner func: self.foo = " + self.foo);
+            }());
+        }
+    };
+    myObject.func();
+
+    //第一个和第二个的输出不难判断，在 ES6 之前，JavaScript 只有函数作用域，
+    //所以 func 中的 IIFE 有自己的独立作用域，并且它能访问到外部作用域中的 self，
+    //所以第三个输出会报错，因为 this 在可访问到的作用域内是 undefined，第四个输出是 bar
+    
+</script>
+</body>
+</html>

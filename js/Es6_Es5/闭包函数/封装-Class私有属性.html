@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Class私有属性</title>
+</head>
+<body>
+<script>
+    //错误用法：不能在return的{}Object对象中使用this.name获取父级的变量name，
+    // 因为this指向了调用function的Object（{}）,
+    // 所以应该直接使用name，这样就会在作用域链中寻找name
+    console.log("---------------------------错误的私有变量用法------------------------------")
+
+    var person = function () {
+       var name = "daniel"
+        return{
+           setName :function (name) {
+               this.name = name
+           },
+            getName :function () {
+                return this.name
+            }
+        }
+    }()
+    
+    console.log(person.name);
+    //直接访问，结果为undefined
+    console.log(person.getName());
+    person.setName("abruzzi");
+    console.log(person.getName());
+
+    console.log("---------------------------正确的私有变量用法------------------------------")
+    var person2 = function () {
+        var name = "daniel"
+        return{
+            setName :function (name) {
+                name = name
+            },
+            getName :function () {
+                return name
+            }
+        }
+    }()
+    console.log(person2.name);//name私有变量，直接访问，结果为undefined
+    console.log(person2.getName());
+    person2.setName("abruzzi");
+    console.log(person2.getName());
+
+</script>
+</body>
+</html>

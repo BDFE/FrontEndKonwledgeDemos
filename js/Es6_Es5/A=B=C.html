@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>let作用域</title>
+</head>
+
+<body>
+    <script>
+        Object.defineProperty(window, 'a', {
+            set: (v) => {
+                this.value = v;
+                console.log('a set');
+            },
+            get: () => {
+                console.log('a get');
+                return this.v;
+            }
+        })
+        Object.defineProperty(window, 'b', {
+            set: (v) => {
+                this.value = v;
+                console.log('b set');
+            },
+            get: () => {
+                console.log('b get');
+                return this.v;
+            }
+        })
+        Object.defineProperty(window, 'c', {
+            say: 'hello',
+            set: (v) => {
+                console.log('c set');
+                this.value = v;
+            },
+            get: () => {
+                console.log('c get');
+                return this.v;
+            }
+        })
+        let obj = {
+            key: 'daniel',
+            value: 44
+        }
+        console.log('------- a = b = c--↓------')
+        a = b = c;
+        console.log('-------a = b---↓-----')
+        a = b
+    </script>
+    <script>
+        console.log('-----赋值运算从右往左-----↓-----')
+
+        var a1 = {
+            n: 1
+        };
+        var b1 = a1;
+        a1 = {
+            n: 2
+        };
+        a1.x = a1;
+        console.log(a1.x);
+        console.log(b1.x);
+
+        console.log('-------访问属性、调用方法运算符"."的优先级高于赋值运算符---↓-----')
+        var a2 = {
+            n: 1
+        }
+        var b2 = a2;
+        a2.x = a2 = {
+            n: 2
+        };
+        console.log(a2.x);
+        console.log(b2.x)
+    </script>
+
+</body>
+
+</html>

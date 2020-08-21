@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    console.log('a'-'b'+"2")
+    console.log('a'-'b'+2)
+    function Foo2() {
+        getName = function () {
+            console.log("foo2")
+        }
+        var selt = this
+        return selt
+    }
+    function Foo() {
+        getName = function () {
+            console.log(1)
+        }
+        var selt = this
+        return selt
+    }
+    Foo.getName=function () {
+        console.log(2)
+    }
+    Foo.prototype.getName = function () {
+        console.log(3)
+    }
+    var getName = function () {
+        console.log(4)
+    }
+    function gerName() {
+        console.log(5)
+    }
+    Foo.getName()
+
+    console.log("------first getName()")
+    getName()
+    var f1=Foo().getName()
+//    var f2=Foo2().getName()
+//    console.log(f1===f2)
+//    console.log(this)
+    console.log("------second getName()")
+    this.getName()
+    getName()
+    new Foo.getName()
+    new Foo().getName()
+    getName()
+
+
+</script>
+</body>
+</html>

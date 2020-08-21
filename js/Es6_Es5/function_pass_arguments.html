@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pass arguments</title>
+</head>
+<body>
+<script>
+    var manyArgFun = (arg1,arg2,arg3)=>{
+        console.log(arg1,arg2,arg3)
+        if(!arg2) console.log(22)
+        if(!arg3) console.log(333)
+        console.log("--------------")
+    }
+
+    manyArgFun(1)
+
+    manyArgFun("","",3)
+    manyArgFun(null,2,)
+</script>
+</body>
+</html>

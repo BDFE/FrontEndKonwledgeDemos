@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>vh-vw</title>
+</head>
+
+<body>
+    <div class="out">
+        <div class="absolute">
+        </div>
+        <div class="fixed">
+        </div>
+
+    </div>
+</body>
+
+<style>
+    .out {
+        /* position: relative; */
+        /*关键点*/
+        height: 2000px;
+        background: yellow;
+    }
+
+    .absolute {
+        position: absolute;
+        top: 100px;
+        left: 100px;
+        width: 100px;
+        height: 100px;
+        background: red;
+    }
+
+    .fixed {
+        position: fixed;
+        top: 100px;
+        right: 100px;
+        width: 100px;
+        height: 100px;
+        background: green;
+    }
+</style>
+
+</html>

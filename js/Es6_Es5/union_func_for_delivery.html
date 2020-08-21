@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+        var getFullName = (first,last)=>{
+            return last.toUpperCase() + "" + first.toUpperCase()
+        }
+
+        var getAge = (birthYear,now)=>{
+            return now - birthYear
+        }
+
+        var getPersonInfo = (getFullName,getAge)=>(name,age)=>{
+            console.log(`my name is ${name},and my age is :${age}`)
+        }
+
+//        var getInfoWithCache = getPersonInfo(memoize(getFullName),memoize(getAge) )
+        getFullName("wentao","kong")
+
+        getAge(1993,2017)
+
+        getPersonInfo()
+</script>
+
+</body>
+</html>

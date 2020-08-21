@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>popup window</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script language="javascript" type="text/javascript">
+        function closeWin() {
+            window.returnValue = true;
+            window.close();
+        }
+        //HTML DOM fully loaded, and fired window.onload later. 
+        document.onreadystatechange = function (e) {
+            if (document.readyState === 'complete') {
+                window.addEventListener('message', function (e) {
+                    var params = e.data;
+                    console.log('message', e, e.data);
+                    $('#cl1').text(params[0][1]);
+                    $('#cl2').text(params[1][1]);
+                });
+            }
+        };
+    </script>
+</head>
+
+<body>
+    Parameter CL1:
+    <b id="cl1"></b>
+    Parameter CL2:
+    <b id="cl2"></b>
+    <div>
+        <input type="button" value="Return Value" onclick="closeWin()" />
+    </div>
+</body>
+
+</html>

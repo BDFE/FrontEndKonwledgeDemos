@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head></head>
+
+<body>
+    <div id="mypic1">onloading……</div>
+    <div id="mypic2">onloading……</div>
+    <div id='replaceImg'>onloading……</div>
+
+    <script type="text/javascript">
+        var obj = new Image();
+        obj.src = "http://www.w3school.com.cn/i/eg_tulip.jpg";
+        obj.onload = function () {
+            console.log('图片的宽度为：' + obj.width + '；图片的高度为：' + obj.height);
+            document.getElementById("mypic1").innerHTML = "<img src='" + this.src + "' />";
+        }
+    </script>
+
+    <script type="text/javascript">
+        var obj1 = new Image();
+        obj1.src = "http://www.w3school.com.cn/i/eg_tulip.jpg";
+        obj1.onreadystatechange = function () {
+            console.log('ready')
+            if (obj1.readyState == "complete") {
+                console.log('图片的宽度为：' + obj1.width + '；图片的高度为：' + obj1.height);
+                document.getElementById("mypic2").innerHTML = "<img src='" + this.src + "' />";
+            }
+        }
+    </script>
+
+    <script>
+        const imgUrl = "http://www.w3school.com.cn/i/eg_tulip.jpg";
+        var imgDiv = document.getElementById("replaceImg");
+        loadImage(imgUrl, (img)=>{
+            imgDiv.innerHTML = imgDiv;
+        })
+        function loadImage(url, callback) {
+            var img = new Image();
+            //创建一个Image对象，实现图片的预下载
+            img.src = url;
+            if (img.complete) {
+                // 如果图片已经存在于浏览器缓存，直接调用回调函数
+                callback.call(img);
+                return; // 直接返回，不用再处理onload事件 
+            }
+            img.onload = function () {
+                //图片下载完毕时异步调用callback函数。
+                callback.call(img);//将回调函数的this替换为Image对象
+            };
+        };
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+   /*
+   1.原型链
+
+    基本思想：利用原型让一个引用类型继承另外一个引用类型的属性和方法。
+
+    构造函数，原型，实例之间的关系：每个构造函数都有一个原型对象，原型对象包含一个指向构造函数的指针，而实例都包含一个指向原型对象的内部指针。
+   */
+
+    function SuperType() {
+//        this.property = true;
+    }
+    SuperType.prototype.getSuperValue = function() {
+        return this.property;
+    }
+    function SubType() {
+        this.property = false;
+    }
+    //继承了SuperType
+    SubType.prototype = new SuperType();
+   var compare = SubType.__proto__ == SuperType.prototype   //false
+   var compare2 = SubType.prototype.__proto__  == SuperType.prototype //true
+   console.log(compare,compare2)
+    SubType.prototype.getSubValue = function (){
+        return this.property;
+    }
+    var instance = new SubType();
+    console.log(instance.getSuperValue());//true
+    console.log(instance.getSubValue());//true
+
+</script>
+</body>
+</html>
+
+
+
+

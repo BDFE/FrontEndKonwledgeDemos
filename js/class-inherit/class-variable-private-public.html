@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>私有变量、公有变量</title>
+</head>
+<body>
+<script>
+    var Parent0 = function () {
+        var name = "daniel"
+        this.age = 24
+        this.hobbies = ["pingpang","basketball","soccer"]
+        this.sayName = function () {
+            console.log(`say Parent0 private name By public inner func:${name}`)
+        }
+    }
+    Parent0.prototype.sayAge = function () {
+        console.log(`Parent age :${this.age}`)
+    }
+    var Child = function (sex) {
+        this.sex = sex
+    }
+    Child.prototype = new Parent0()
+
+    var child = new Child("boy")
+    child.hobbies.push("sing")
+    child.sayName()
+    child.sayAge()
+    console.log(child.hobbies)
+    console.log("----------------------------")
+    var parent = new Parent0()
+    parent.sayName()
+    parent.sayAge()
+    console.log(parent.hobbies)
+
+
+
+</script>
+</body>
+</html>

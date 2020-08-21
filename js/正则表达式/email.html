@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断邮箱</title>
+</head>
+<body>
+    <script type="text/javascript">
+            function isEmail(str){
+                var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+                return reg.test(str);
+            }
+    var str = 'test@hotmail.com';
+    document.write(isEmail(str)+'<br />');
+    var str2 = 'test@sima.vip.com';
+    document.write(isEmail(str2)+'<br />');
+    var str3 = 'te-st@qq.com.cn';
+    document.write(isEmail(str3)+'<br />');
+    var str4 = 'te_st@sima.vip.com';
+    document.write(isEmail(str4)+'<br />');
+    var str5 = 'te.._st@sima.vip.com';
+    document.write(isEmail(str5)+'<br />');
+</script>
+    <script type="text/javascript">
+        fChkMail=function(szMail){
+            var szReg   = /^[a-zA-Z0-9]+([_.][a-zA-Z0-9]+)*@[a-z0-9]+.[a-z]{2,5}$/
+            var bChk=szReg.test(szMail);
+            return bChk;
+        }
+    </script>
+    <input type="text" id="Mail" value="" />
+    <input type="button" value="验证邮箱地址" onclick="alert(fChkMail(document.getElementById('Mail').value));" />
+    <p>邮箱不能以 - _ .以及其它特殊字符开头和结束</p>
+    <p>邮箱域名结尾为2~5个字母，比如cn、com、name</p>
+</body>
+</html>

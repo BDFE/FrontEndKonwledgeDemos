@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+   let ar = [[19,129],[22, 125],[22, 133]]
+
+   let sum = ar.reduce((per,cur)=>{
+       let add
+       per[0]? (add = per[0]+cur[0]) :(add =  per+cur[0])
+       return add
+    })
+    let av = sum/ar.length
+    console.log(av)
+</script>
+</body>
+</html>

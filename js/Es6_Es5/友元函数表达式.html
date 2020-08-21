@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>let作用域</title>
+</head>
+<body>
+<script>
+
+    console.log("-------------友元函数表达式------------")
+    var outFun = function innerFunc() {
+        console.log("innerFunc called by itself")
+        console.log(innerFunc.prototype)
+    };
+    if(outFun()){
+        console.log("outFun:")
+        console.log(outFun())
+    }
+
+        console.log("innerfunc is:")
+//        console.log(innerFunc())//报错访问不到
+
+    var y=1 ,x=y=typeof x;
+    console.log(x)
+
+
+
+</script>
+</body>
+</html>

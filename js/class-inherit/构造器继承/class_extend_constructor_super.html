@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//使用ES6 中的Class 和 extend进行继承，
+// constructor中使用super继承父类参数
+    class A {
+        constructor(name,age){
+            this.name = name
+            this.age = age
+        }
+        sayHi(){
+            console.log("我是："+this.name+" 年龄："+this.age)
+        }
+    }
+    class B extends A{
+        constructor(name,age,sex,lang){
+            super(name,age)
+            this.sex = sex
+            this.lang = lang
+        }
+        introduce(){
+            console.log("性别"+this.sex+"语言"+this.lang)
+        }
+    }
+
+    var person1 = new B("daniel",24,"boy","chinese")
+    console.log(person1)
+    person1.sayHi()
+    person1.introduce()
+
+
+    console.log("------------------立即执行函数表达式+Apply()  -------------------")
+    !(function () {
+        var A = function (light) {
+            this.light1 = light;
+        };
+        var B = function (light) {
+            this.light = light;
+            A.call(this,light);//你需要手动调用A的构造方法
+        };
+        //给B赋值的同时，给A赋值
+        B.prototype = new A();
+        var C = new B(123);
+        console.log(C.light);
+        console.log(C.light1);
+    })()
+
+</script>
+</body>
+</html>

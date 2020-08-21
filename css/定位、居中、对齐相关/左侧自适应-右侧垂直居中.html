@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>固定-自适应</title>
+</head>
+<body>
+        1，固定宽度区浮动，自适应区不设宽度而设置 margin 
+        #自适应必须放在后面
+    <div id="wrap">
+        <div id="sidebar" style="height:300px;">
+          <div id="vertival_align">
+          <img src='' alt="无图片" />
+          </div>
+        </div>
+        <div id="content" style="height:300px;">自适应区
+
+        </div>
+      </div>
+      <div id="footer">后面的一个DIV，以确保前面的定位不会导致后面的变形</div>
+
+</body>
+
+<style>
+#wrap {
+    overflow: hidden; *zoom: 1;
+    /* display: flex; */
+    /* justify-content:space-between; */
+    /* position:relative; */
+  }
+  #content ,#sidebar {
+    background-color: #eee;
+  }
+  #sidebar {
+    /* width:10%; */
+    background-color: #0F0;
+    float: right; width: 300px;
+    display: flex;
+    align-items:center;
+  }
+  #content {
+    margin-right: 310px;
+  }
+  #vertival_align{
+
+  }
+  #footer {background-color: #f00;color:#fff; margin-top: 1em}
+
+
+</style>
+</html>

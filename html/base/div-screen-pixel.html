@@ -1,0 +1,16 @@
+<!DOCTYPE html> 2
+<html lang="en"> 3
+
+<head>
+    <meta charset="UTF-8">
+    <title>获取div相对屏幕于左上角的绝对位置</title>
+</head>
+
+<body>
+    <div class="div1"></div> 9 <script>
+        10 //返回值是一个包含width height top right bottom left的对象11         
+        var rect = document.querySelector('.div1').getBoundingClientRect() 　　　　 console.log(rect);13     
+    </script>14
+</body>15
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head></head>
+<body data-pinterest-extension-installed="ff1.37.9">
+
+
+    简单的代码实现，仅供参考：
+    单选框：
+    <div>
+        <input type="radio" name="sex" value="n" />
+        <input type="radio" name="sex" value="v" />
+    </div>
+     
+    复选框：
+    <div>
+        <input type="checkbox" value="n" />
+        <input type="checkbox" value="v" />
+    </div>
+     
+    下拉框：
+    <div>
+        <select>
+            <option>n</option>
+            <option>n</option>
+            <option>n</option>
+        </select>
+    </div>
+
+    <div>  
+        <input type="hidden" id="s_zoneStatId"    />  
+        <input type="text" id="s_zoneStatName"   />  
+        <div class="multipeSelect"     
+    style="display: none; position: absolute;"   
+    targetObjectId = "s_zoneStatId"   
+    targetObjectName = "s_zoneStatName" >  
+                   <ul>  
+                                           <li>  
+                                                <input value="1" type="checkbox">  
+                                                <span>待评测</span>  
+                                           </li>  
+                                          
+                                           <li>  
+                                                <input value="2" type="checkbox">  
+                                                <span>评测中</span>  
+                                           </li>  
+                                          
+                                           <li>  
+                                                <input value="3" type="checkbox">  
+                                                <span>已评测</span>  
+                                           </li>  
+                                          
+                                           <li>  
+                                                <input value="4" type="checkbox">  
+                                                <span>已定级</span>  
+                                           </li>  
+                                          
+                                      
+                   </ul>  
+                   <a href="javascript:void(0)"  class="click">清空</a>  
+                   <a href="javascript:void(0)"  class="click">反选</a>  
+          </div>  
+    </div>  
+</body>
+</html>

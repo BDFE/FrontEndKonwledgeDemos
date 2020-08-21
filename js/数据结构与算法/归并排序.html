@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>冒泡算法</title>
+</head>
+
+<body>
+    <script>
+        function mergeSort(arr) {
+            let len = arr.length;
+            let mid = Math.ceil(len / 2);
+            if (len > 1) {
+                let s1 = mergeSort(arr.slice(0, mid))
+                let s2 = mergeSort(arr.slice(mid, len))
+                return merge(s1, s2)
+            } else {
+                return arr
+            }
+        }
+
+        function merge(left, right) {
+            let res = [];
+            while (left.length > 0 && right.length > 0) {
+                if (left[0] < right[0]) {
+                    let t = left.shift();
+                    res.push(t)
+                } else {
+                    let t = right.shift();
+                    res.push(t)
+                }
+            }
+            if (left.length > 0) {
+                res = res.concat(left);
+            }
+            if (right.length > 0) {
+                res = res.concat(right);
+            }
+            return res
+        }
+        var list = [32, 24, 95, 45, 75, 22, 95, 49, 3, 76, 56, 11, 37, 58, 44, 19, 81];
+        let r = mergeSort(list);
+        console.log(r.join(','))
+    </script>
+</body>
+
+</html>

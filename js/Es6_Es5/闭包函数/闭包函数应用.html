@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包函数应用</title>
+</head>
+<body>
+<script>
+    var add = (function () {
+        var counter = 0;
+        return function () {
+            return counter += 1;
+        }
+    })();//这里var add已经是执行过后的函数了，
+     //执行匿名子函数
+    add();
+    add();
+    console.log(add())
+</script>
+</body>
+</html>

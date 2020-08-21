@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>水平垂直居中</title>
+</head>
+
+<body>
+  -------------top,left,bottom,right=0,margin:auto--------------------
+
+  <div class="p">
+    <div class="c">
+      已知宽度
+    </div>
+  </div>
+  <style>
+    .p {
+      position: relative;
+      background: #ccc;
+      height: 400px;
+
+    }
+
+    .c {
+      position: absolute;
+      background: red;
+      width: 100px;
+      height: 100px;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+  </style>
+  -------------top,left,translate--------------------
+  <div class="p1">
+    <div class="c1">
+      未知宽度
+    </div>
+  </div>
+  <style>
+    .p1 {
+      position: relative;
+      background: #ccc;
+      height: 100px;
+    }
+
+    .c1 {
+      position: absolute;
+      background: blue;
+      height: 40px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+  --------------display:table-cell,text-align,vertical-align && inline-block-------------------
+  <div class="table">
+    <div class="cell">
+      inline-block
+    </div>
+  </div>
+  <style>
+    .table {
+      width: 200px;
+      height: 200px;
+      background: #ccc;
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .cell {
+      background: green;
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+    }
+  </style>
+  --------------grid-------------------
+  <div class="g2">
+    <div class="gc2">
+      未知宽度2
+    </div>
+  </div>
+  <style>
+    .g2 {
+      display: grid;
+      background: #ccc;
+      height: 150px;
+    }
+
+    .gc2 {
+      background: green;
+      height: 50px;
+      margin: auto;
+    }
+  </style>
+
+  ----------------flex布局 margin auto-----------------
+  <div class="flex">
+    <div class="text">
+      未知宽度2
+    </div>
+  </div>
+  <style>
+    .flex {
+      display: flex;
+      background: #ccc;
+      height: 200px;
+
+    }
+
+    .text {
+      background: black;
+      margin: auto;
+    }
+  </style>
+
+  ----------------flex布局 margin justify-content,align-items-----------------
+  <div class="flex2">
+    <div class="text2">
+      未知宽度2
+    </div>
+  </div>
+  <style>
+    .flex2 {
+      display: flex;
+      background: #ccc;
+      height: 200px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .text2 {
+      background: yellow;
+      /* margin: auto; */
+    }
+  </style>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>vh-vw</title>
+</head>
+
+<body>
+    <div class="demo1">
+        <div class="del"></div>
+    </div>
+</body>
+
+<style>
+    .demo1 {
+        position: absolute;
+        left: 100px;
+        width: 36px;
+        height: 36px;
+        overflow: hidden;
+        /* margin: 50px auto; */
+    }
+
+    .demo1 .del {
+        width: 36px;
+        height: 36px;
+        position: relative;
+        background: url("./sex.png") no-repeat center;
+    }
+
+    .demo1 .del:hover {
+        left: -36px;
+        border-right: 36px solid transparent;
+        /* -webkit-filter: drop-shadow(36px 0 0px red); */
+        filter: drop-shadow( 36px 0 0px #ff00d4);
+    }
+</style>
+
+</html>

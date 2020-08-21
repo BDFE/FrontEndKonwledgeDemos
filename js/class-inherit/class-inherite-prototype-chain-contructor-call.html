@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+     3.组合继承
+     基本思想：将原型链和借用构造函数的技术组合在一块，从而发挥两者之长的一种继承模式。
+     例子：
+     */
+
+    function SuperType(Second_name) {
+        this.Second_name = "super ";
+        this.colors = ["red", "blue", "green"];
+    }
+    SuperType.prototype.sayName = function () {
+        console.log(this.Second_name+this.first_name);
+    }
+    function SubType(first_name, age) {
+//        SuperType.call(this, name);//继承属性,和类
+//        SuperType.call(this);//继承属性
+        this.Second_name = "sub "
+        this.first_name = first_name
+        this.age = age
+    }
+
+    //继承方法
+    SubType.prototype = new SuperType();
+//    SubType.prototype.constructor = SuperType;
+    SubType.prototype.sayAge = function () {
+        console.log(this.age);
+    }
+
+    var instance1 = new SubType("EvanChen", 18);
+    instance1.colors.push("black");
+    console.log(instance1.colors);//"red","blue","green","black"
+    instance1.sayName();//"EvanChen"
+    instance1.sayAge();//18
+    var instance2 = new SubType("EvanChen666", 20);
+    console.log(instance2.colors);//"red","blue","green"
+    instance2.sayName();//"EvanChen666"
+    instance2.sayAge();//20
+
+
+</script>
+</body>
+</html>

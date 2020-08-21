@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>登录</title>
+</head>
+
+<body>
+    <div id="login"></div>
+</body>
+<!--线下联调环境地址 -->
+<script src="http://beta.auth.map.baidu.com:8000/static/ssoJsapi/offline/api.js"></script>
+<!--线上正式环境地址 -->
+<script src="https://jiaotong.baidu.com/static/ssoJsapi/production/api.js"></script>
+<script>
+   
+
+    var login = new _bdi_passport.Login({
+        // 服务端localhost不生效
+        redirect: 'http://localhost:8088/github/FrontEndKonwledgeDemos/TEST/login/test.html',
+        // 测试环境的serviceLoginUrl
+        serviceLoginUrl: 'http://cp01-jiaotongyun-6.epc.baidu.com:8080/guidingscreen/setTicket',
+        // 线上环境的serviceLoginUrl
+        // serviceLoginUrl: 'http://jiaotong.baidu.com/guidingscreen/setTicket',
+        staticPage: location.origin + '/github/FrontEndKonwledgeDemos/TEST/login/loginSuccess.html',
+        onSuccess: function (data) {
+            console.log(data.username + '登录成功');
+        }
+    });
+    login.render(document.getElementById('login'));
+</script>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试constructor的作用</title>
+</head>
+<body>
+<script>
+    function SuperClass() {
+        this.colors = ["black", "blue", "white"]
+    };
+    SuperClass.prototype.sayHello = function () {
+        console.log("surperClass say hello")
+    };
+
+    function SubClass() {
+        this.names = ["daniel", "tony"]
+    }
+    SubClass.prototype.sayHi = function () {
+        console.log("subClass sayhi ...")
+    };
+    SubClass.prototype = new SuperClass();
+    SubClass.prototype.constructor = SubClass;
+
+    var sub = new SubClass();
+    console.log(SubClass.prototype.constructor === SubClass); // ② true
+    console.log(sub.constructor === SubClass); // ④ true
+    console.log(sub.__proto__ === SubClass.prototype); // ⑤ true
+    console.log(SubClass.prototype.__proto__ == SuperClass.prototype); // ⑦ true
+
+</script>
+</body>
+</html>

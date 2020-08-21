@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结果缓存</title>
+</head>
+<body>
+<script>
+    resultBuffer = (function () {
+        var buffer = {
+            "daniel":"kong"
+        }
+        return {
+            addmap: function (key) {
+                if (key in buffer) {
+                    return buffer[key]
+                } else {
+                    buffer[key] = new Map([[key,key]])
+                    console.log()
+                }
+            },
+            deleteMap: function (key) {
+                if (key in buffer) {
+                    delete buffer[key]
+                } else {
+                    console.log("no such key: " + key)
+                }
+            }
+        }
+//        return {add:addmap,delete:deleteMap}
+    })()
+    for (let i = 0; i < 5; i++) {
+        resultBuffer.addmap(i)
+    }
+    for (let i = 0; i < 7; i++) {
+        resultBuffer.deleteMap(i)
+    }
+</script>
+</body>
+</html>

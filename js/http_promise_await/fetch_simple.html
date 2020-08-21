@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>fetch</title>
+</head>
+
+<body>
+    <script>
+        let ak = '49tGfOjwBKkG9zG76wgcpIbce4VZdbv6';
+        let name = '故宫';
+        // 不支持跨域，需要使用JSONP
+        let geoCodingUrl = `http://api.map.baidu.com/geocoder/v2/?address=${name}&output=json&ak=${ak}`;
+        let test = 'https://www.villainhr.com/cors-enabled/some.json';
+        fetch(geoCodingUrl, {
+                mode: 'cors',
+                credentials: 'include'
+            })
+            .then(function (response) {
+                console.log(response);
+                return response.text();
+            })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+     4.原型式继承
+     基本想法：借助原型可以基于已有的对象创建新对象，同时还不必须因此创建自定义的类型。
+     原型式继承的思想可用以下函数来说明：
+     例子：
+     */
+    function object(o) {
+        function F() {
+        }
+
+        F.prototype = o;   //这里使用prototype
+        return new F();
+    }
+
+    var person = {
+        name: "EvanChen",
+        friends: ["Shelby", "Court", "Van"]
+    };
+    var anotherPerson = object(person);
+    anotherPerson.name = "Greg";
+    anotherPerson.friends.push("Rob");
+
+    var yetAnotherPerson = object(person);
+    yetAnotherPerson.name = "Linda";
+    yetAnotherPerson.friends.push(["333", "daniel"]);
+    yetAnotherPerson.friends = ["111", "222"];
+    yetAnotherPerson.friends.push(["333", "daniel"]);
+    console.log(yetAnotherPerson.friends);//"Shelby","Court","Van","Rob","Barbie"
+    console.log(person.friends);//"Shelby","Court","Van","Rob","Barbie"
+
+    /*
+     ECMAScript5通过新增Object.create()方法规范化了原型式继承，
+     这个方法接收两个参数：一个用作新对象原型的对象和一个作为新对象定义额外属性的对象。
+     */
+
+    var person = {
+        name: "EvanChen",
+        friends: ["Shelby", "Court", "Van"]
+    };
+    var anotherPerson = Object.create(person);
+    anotherPerson.name = "Greg";
+    anotherPerson.friends.push("Rob");
+    var yetAnotherPerson = Object.create(person);
+    yetAnotherPerson.name = "Linda";
+    yetAnotherPerson.friends.push("Barbie");
+    console.log(person.friends);//"Shelby","Court","Van","Rob","Barbie"
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>js print打印网页指定区域内容的简单实例</title>
+</head>
+<script>
+function myPrint(obj){
+  var newWindow=window.open("打印窗口","_blank");
+  var docStr = obj.innerHTML;
+  newWindow.document.write(docStr);
+  newWindow.document.close();
+  newWindow.print();
+//   newWindow.close();
+}
+</script>
+<div id="print">
+<hr />
+  打印演示区域,点击打印后会在新窗口加载这里的内容！
+<hr />
+</div>
+<button onclick="myPrint(document.getElementById('print'))">打 印</button>
+ 
+</html>

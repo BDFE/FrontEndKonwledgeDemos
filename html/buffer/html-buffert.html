@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" manifest="html-buffer.manifest">
+
+<head></head>
+<body data-pinterest-extension-installed="ff1.37.9">
+<script type="text/javascript" src="http://www.w3school.com.cn/example/html5/demo_time.js"></script>
+<link rel="stylesheet" href="http://minedata.cn/minemapapi/v1.2/minemap.css">
+<script src="http://minedata.cn/minemapapi/v1.2/minemap.js"></script>
+<script src="../vue.min.js"></script>
+
+<img src="../video.png">
+<img src="../kakou.png">
+
+<p id="timePara">
+    <button onclick="getDateTime()">获得日期和事件</button>
+</p>
+<p>请打开<a href="html-buffer-localstorage-session.html" target="_blank">这个页面</a>，然后脱机浏览，重新加载页面。页面中的脚本和图像依然可用。</p>
+
+
+<script type="text/javascript">
+    if (navigator.onLine) // 在线状态
+    {
+        alert("online");
+    }
+    if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+    window.applicationCache.update()
+    }
+    document.write("TestVisits " + localStorage.pagecount + " time(s).");
+    document.write("sessionStorage-Visits " + sessionStorage.pagecount + " time(s).");
+
+</script>
+
+</body>
+</html>

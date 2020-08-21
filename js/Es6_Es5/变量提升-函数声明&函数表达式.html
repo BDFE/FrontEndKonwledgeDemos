@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>let作用域</title>
+</head>
+<body>
+<script>
+
+//    IIFE可以带来块状作用域效果：
+    var a = 2;
+    (function IIFE(){
+        var a = 3;
+        console.log( a );   // 3
+    })();
+    console.log( a );       // 2
+
+    console.log("-------------函数表达式------------")
+    if (true) {
+        foo = function(){
+            document.write( "---1" );
+        }
+    }
+    else {
+        foo = function(){
+            document.write( "--2" );
+        }
+    }
+    foo();
+
+
+    console.log("-----------函数声明--------------");
+    if (true) {
+        function statementFoo() {
+            document.write( "**1" );
+        }
+    } else {
+        function statementFoo() {
+            document.write( "**2" );
+        }
+    }
+
+    statementFoo();      // 2
+    console.log("-------------------------");
+//    这里怎么又输出2了呢？原来函数声明和变量一样，都有一个提升的过程，
+//    而和函数表达式只会提升声明不一样，函数声明即会提升声明，也会提升定义，
+//    所以第二个foo的定义把第一个foo给替换掉了。
+
+
+
+</script>
+</body>
+</html>

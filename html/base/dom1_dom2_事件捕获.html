@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    #outer {
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+      position: relative;
+    }
+
+    #inner {
+      width: 40px;
+      height: 40px;
+      border: 1px solid green;
+      position: relative;
+    }
+  </style>
+</head>
+
+
+<body>
+  <div id="outer" onclick="outClick()">
+    <div id="inner" onclick="inClick()"></div>
+  </div>
+
+  <script type="text/javascript">
+    function outClick() {
+      console.warn("out onclick ");
+    }
+
+    function inClick() {
+      console.warn("in onclick ");
+    }
+
+    window.onload = function () {
+      var outer = document.getElementById("outer");
+      var inner = document.getElementById('inner');
+
+      // 第三个参数：true捕获阶段，false冒泡阶段
+      outer.addEventListener("click", function () {
+        console.log("out capture");
+      }, true);
+
+
+      outer.addEventListener("click",
+        function () {
+          console.dir("out buble");
+        }, false)
+
+      inner.addEventListener("click", function () {
+        console.log("in capture");
+      }, true);
+      inner.addEventListener("click", function () {
+        console.log("in buble");
+      }, true);
+
+    }
+  </script>
+</body>
+
+</html>

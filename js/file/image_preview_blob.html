@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <form action="#">
+        
+        <input type="file" id="fileInput">
+    </form>
+    <div id="imgShow"></div>
+    <script>
+        var fileInput = document.getElementById('fileInput')
+
+        fileInput.addEventListener('change', function () {
+            var imgShow = document.getElementById('imgShow'),
+                files = this.files, //原书这里是event.files，经过测试，修正为this.files
+                url = window.URL.createObjectURL(files[0]) //创建URL对象
+            if (url) {
+                if (/image/.test(files[0].type)) { //如果上传的文件类型为image
+                    imgShow.innerHTML = '<img src="' + url + '">' //将图片直接插入到页面中
+                } else {
+                    imgShow.innerHTML = "not an image"
+                }
+            } else {
+                imgShow.innerHTML = 'your browser doesnt support obj urls!'
+            }
+        })
+    </script>
+</body>
+
+</html>

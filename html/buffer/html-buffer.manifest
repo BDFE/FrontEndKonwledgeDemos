@@ -1,0 +1,18 @@
+CACHE MANIFEST
+#VERSION 3.9
+# 直接缓存的文件
+CACHE:
+
+#需要在时间在线的文件
+NETWORK:
+kakou.png
+video.png
+
+http://minedata.cn/minemapapi/v1.2/minemap.js
+http://www.w3school.com.cn/example/html5/demo_time.js
+./vue.min.js
+
+
+# 替代方案
+FALLBACK:
+./fallback.html

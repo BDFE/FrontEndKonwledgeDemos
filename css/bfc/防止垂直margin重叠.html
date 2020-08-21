@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .div {
+            background: #ccc;
+            margin: 10px;
+            border: 1px solid black;
+        }
+
+        .p1 {
+            width: 100px;
+            height: 100px;
+            margin: 100px;
+            background-color: crimson;
+            color: #FFF;
+            text-align: center;
+            line-height: 100px;
+            background: #0ff;
+        }
+
+        #wrap1 {
+            overflow: hidden;
+            background: #00f;
+        }
+
+        #wrap0 {
+            /* overflow: hidden; */
+            background: #00f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div">
+        <p class="p1">宽高100px</p>
+        <div id="wrap0">
+            <p class="p1">margin 100</p>
+            没有清除浮动;
+        </div>
+    </div>
+    <div class="div">
+        <p class="p1">宽高100px</p>
+        <div id="wrap1">
+            <p class="p1">margin 100 </p>
+            overflow: hidden;
+        </div>
+    </div>
+</body>
+
+</html>

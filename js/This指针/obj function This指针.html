@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        function fun() {
+            this.name = "constructor name use this.name"
+        }
+
+        fun.prototype.name = "prototype name"
+        fun.prototype.say = function () {
+            console.log('i am:', this.name)
+        }
+        var testFun = new fun()
+
+        testFun.name = "set name"
+        console.log(testFun.name) 
+        
+        testFun.say()
+        
+        console.log(testFun.__proto__.name) 
+        console.log("****************************************")
+        let fn = testFun.say;
+        fn && fn();
+    </script>
+</body>
+
+</html>

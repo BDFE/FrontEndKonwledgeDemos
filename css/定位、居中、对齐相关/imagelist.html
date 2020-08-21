@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>图片列表之float方法</title>
+</head>
+
+<body>
+  <ul>
+    <li>
+      <img src="http://sandbox.runjs.cn/uploads/rs/54/bvxwdunk/1.jpg">
+    </li>
+    <li>
+      <img src="http://sandbox.runjs.cn/uploads/rs/54/bvxwdunk/2.jpg">
+    </li>
+    <li>
+      <img src="http://sandbox.runjs.cn/uploads/rs/54/bvxwdunk/3.jpg">
+    </li>
+    <li>
+      <img src="http://sandbox.runjs.cn/uploads/rs/54/bvxwdunk/4.jpg">
+    </li>
+    <li>
+      <img src="http://sandbox.runjs.cn/uploads/rs/54/bvxwdunk/5.jpg">
+    </li>
+    <li>
+      <img src="http://sandbox.runjs.cn/uploads/rs/54/bvxwdunk/6.jpg">
+    </li>
+    <li>
+      <img src="http://sandbox.runjs.cn/uploads/rs/54/bvxwdunk/7.jpg">
+    </li>
+    <li>
+      <img src="http://sandbox.runjs.cn/uploads/rs/54/bvxwdunk/8.jpg">
+    </li>
+    <li>
+      <img src="http://sandbox.runjs.cn/uploads/rs/54/bvxwdunk/9.jpg">
+    </li>
+  </ul>
+  <style>
+    /*先清除所有浏览器的默认间距*/
+
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    ul {
+      width: 100%;
+      margin: 100px auto;
+      font-size: 0;
+    }
+
+    li {
+      list-style: none;
+      display: inline-block;
+      width: 33.3%;
+      /*三列图片排列*/
+      height: 80px;
+      /*当图片尺寸不一的时候，需要设置一个最大高度*/
+      text-align: center;
+      /*内容居中*/
+      overflow: hidden;
+      /*超出隐藏*/
+    }
+
+    li img {
+      position: relative;
+      width: 100%;
+      top: 50%;
+      /*li高度的一般*/
+      transform: translateY(-50%);
+      /*再向上移动自身的50%*/
+    }
+  </style>
+</body>
+
+</html>

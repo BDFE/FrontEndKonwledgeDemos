@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head></head>
+<body data-pinterest-extension-installed="ff1.37.9">
+<script type="text/javascript" src="http://www.w3school.com.cn/example/html5/demo_time.js">
+
+</script>
+<p id="timePara">
+    <button onclick="getDateTime()">获得日期和事件</button>
+</p>
+<p>请打开<a href="/example/html5/html5_html_manifest.html" target="_blank">这个页面</a>，然后脱机浏览，重新加载页面。页面中的脚本和图像依然可用。</p>
+
+<script type="text/javascript">
+    if (localStorage.pagecount) {
+        localStorage.pagecount = Number(localStorage.pagecount) + 1;
+    }
+    else {
+        localStorage.pagecount = 1;
+    }
+    if (sessionStorage.pagecount) {
+        sessionStorage.pagecount = Number(sessionStorage.pagecount) + 1;
+    }
+    else {
+        sessionStorage.pagecount = 1;
+    }
+    document.write("localstorage-Visits " + localStorage.pagecount + " time(s)."+" <br/>");
+    document.write("sessionStorage-Visits " + sessionStorage.pagecount + " time(s).");
+</script>
+</body>
+</html>

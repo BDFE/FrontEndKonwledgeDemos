@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //1、forEach 不能 break，不能 return
+    let objArr = [{a:"A"},{b:"B"},{c:"C"}]
+    objArr.forEach((e,ind)=>{
+        e.a=1
+    })
+
+    let objMapRet  = objArr.map((e,ind)=>{
+        e.a=1
+         return e
+    })
+
+    console.log(objArr)
+    console.log(objMapRet)
+
+    //2、for in 遍历循环，递归，会对 function进行遍历
+    //  for-in循环实际是为循环”enumerable“对象而设计的：
+    console.log("for in :")
+
+    console.log("for in = Array")
+    Array.prototype.method=function(){
+        console.log(this.length);
+    }
+    var myArray=[1,2,4,5,6,33,22]
+    myArray.name="数组"
+    for (var index in myArray) {
+        console.log(myArray[index]);
+    }
+    console.log("for in = Object")
+    Object.prototype.method=function(){
+        console.log(this);
+    }
+    var myObject={
+        a:1,
+        b:2,
+        c:3
+    }
+    for (var key in myObject) {
+        console.log(key);
+    }
+
+    for (var key in myObject) {
+        if (myObject.hasOwnProperty(key)) {
+            console.log(key);
+        }
+    }
+
+    myObject.length = 4
+    console.log(myObject)
+
+    //3、for of 对 key：value 进行循环遍历,操作对象
+    // for-of的语法看起来跟for-in很相似，但它的功能却丰富的多，它能循环很多东西。
+    console.log("--------  for of:  -----------")
+    let iterable = [10, 20, 30];
+
+    for (let value of iterable) {
+        console.log(value);
+    }
+    // 10
+    // 20
+    // 30
+
+    let iterablestr = "boo";
+
+    for (let value of iterablestr) {
+        console.log(value);
+    }
+
+    let iterableU8 = new Uint8Array([0x00, 0xff]);
+
+    for (let value of iterableU8) {
+        console.log(value);
+    }
+    // 0
+    // 255
+
+    console.log("iterableMap")
+    let iterableMap = new Map([["1",1], ["num", 2], ["num", 3],["d",4]]);
+
+    for (let [key, value] of iterableMap) {
+        console.log(value);
+    }
+    // 1
+    // 2
+    // 3
+
+    for (let entry of iterableMap) {
+        console.log(entry)
+        entry["num"] = 10
+    }
+    console.log("entry")
+    console.log(iterableMap)
+    // [a, 1]
+    // [b, 2]
+    // [c, 3]
+
+    let iterableSet = new Set([1, 1, 2, 2, 3, 3]);
+
+    for (let value of iterableSet) {
+        console.log(value);
+    }
+    // 1
+    // 2
+    // 3
+    //判断 for of 是否为引用
+    iterableObjList = [{a:1},{b:2},{c:3},{hello:666}]
+    for (let entry of iterableObjList) {
+        console.log(entry)
+        let last = iterableObjList[iterableObjList.length-1]
+        if(entry == last){
+            entry['hello'] = 'nihao'
+        }
+        if(entry === iterableObjList[iterableObjList.length-1]) {
+            console.log("for of is reference ")
+        }
+    }
+    console.log(iterableObjList)
+</script>
+</body>
+</html>

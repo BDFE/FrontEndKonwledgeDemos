@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>路口</title>
+</head>
+
+<body>
+    <div class="cross_road_container">
+        <div class="top_road">
+            <div class="top_road_info_box">
+                <div class="direction_images">
+                    <img src='turnright.png' />
+                    <img src='gostraight.png' />
+                    <img src='turnleft.png' />
+                    <img src='turnback.png' />
+                </div>
+                <div class="direction_num">
+
+                </div>
+            </div>
+        </div>
+        <div class="left_road"></div>
+        <div class="right_road"></div>
+        <div class="bottom_road"></div>
+    </div>
+</body>
+
+<style>
+    .cross_road_container {
+        position: relative;
+        height: 500px;
+        width: 500px;
+        background-color: #f0f8f0;
+    }
+
+
+    .top_road {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 60%;
+        height: 30%;
+        border-bottom: 1px solid gray;
+        border-right: 1px dashed gray;
+    }
+
+    .top_road_info_box {
+        position: relative;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+        background: rgb(142, 231, 142);
+        border-left: 1px solid gray;
+    }
+
+    .direction_images {
+        position: absolute;
+        bottom: 25%;
+        width: 100%;
+        /* line-height: 25%; */
+        height: 25%;
+        display: flex;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .direction_images img {
+        width: 20%;
+        height: auto;
+        border-radius: 10%;
+        margin: auto;
+    }
+
+    .left_road {
+        position: absolute;
+        left: 0;
+        top: 40%;
+        width: 30%;
+        height: 60%;
+        border-right: 1px solid gray;
+        border-top: 1px dashed gray;
+    }
+
+    .right_road {
+        position: absolute;
+        left: 70%;
+        top: 0;
+        width: 30%;
+        height: 60%;
+        border-left: 1px solid gray;
+        border-bottom: 1px dashed gray;
+    }
+
+    .bottom_road {
+        position: absolute;
+        left: 40%;
+        top: 70%;
+        width: 60%;
+        height: 30%;
+        border-top: 1px solid gray;
+        border-left: 1px dashed gray;
+    }
+</style>
+
+</html>

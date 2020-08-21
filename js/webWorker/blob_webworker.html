@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<body>
+  <script id="worker" type="app/worker">
+    addEventListener('message', function(e) { 
+      console.log('i am worker,you send:',e.data);
+      postMessage('Work done!');
+    }, false);
+  </script>
+
+  <script>
+    (function () {
+      var blob = new Blob([document.querySelector('#worker').textContent]);
+      var url = window.URL.createObjectURL(blob);
+      var worker = new Worker(url);
+
+      worker.addEventListener('message', function (e) {
+        console.log('get from worker:', e.data);
+      }, false);
+
+      worker.postMessage('hello xiaodi');
+    })();
+  </script>
+<!-- 
+主线程与子线程之间也可以交换二进制数据，比如File、Blob、ArrayBuffer等对象，也可以在线程之间发送。
+
+但是，用拷贝方式发送二进制数据，会造成性能问题。比如，主线程向子线程发送一个500MB文件，
+默认情况下浏览器会生成一个原文件的拷贝。为了解决这个问题，JavaScript允许主线程把二进制数据直接转移给子线程，
+但是一旦转移，主线程就无法再使用这些二进制数据了，这是为了防止出现多个线程同时修改数据的麻烦局面。
+这种转移数据的方法，叫做Transferable Objects。
+
+如果要使用该方法，postMessage方法的最后一个参数必须是一个数组，用来指定前面发送的哪些值可以被转移给子线程。
+worker.postMessage(arrayBuffer, [arrayBuffer]);
+window.postMessage(arrayBuffer, targetOrigin, [arrayBuffer]);
+ -->
+</body>
+
+</html>

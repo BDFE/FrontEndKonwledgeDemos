@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>冒泡算法</title>
+</head>
+
+<body>
+    <script>
+        function sort(arr) {
+            let d = ~~(arr.length / 2);
+            let j = 0;
+            while (d > 1) {
+                for (let i = d; i < arr.length; i++) {
+                    let tmp = arr[i];
+                    j = i - d;
+                    while (j >= 0 && arr[j] > tmp) {
+                        arr[j + d] = arr[j]
+                        j -= d;
+                    }
+                    j += d;
+                    arr[j] = tmp;
+
+                }
+                d = ~~(d / 2);
+                console.log(arr.join(','))
+            }
+            return arr;
+        }
+        var list = [32, 24, 95, 45, 75, 22, 95, 49, 3, 76, 56, 11, 37, 58, 44, 19, 81];
+        let r = sort(list);
+        console.log(r.join(','))
+    </script>
+</body>
+
+</html>

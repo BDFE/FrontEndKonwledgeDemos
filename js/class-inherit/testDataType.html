@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var num = new Number(123)
+    var str = new String(123)
+    var mystr = "123"
+    var mynum =123
+    console.log(mynum == mystr)
+    console.log(mynum == num)
+    console.log(mynum == str)
+    console.log(`{}=={}:${{}=={}}`)
+    console.log(mynum === mystr)
+    console.log(mynum === num)
+    console.log(mynum === str)
+
+
+    console.log("________________________prototype_____________")
+
+    var myFun = function(){}
+    console.log(myFun.prototype.constructor)
+    myFun.prototype = {}
+    var a = new myFun()
+    var b = new myFun()
+    b.prototype = myFun.prototype
+    console.log(myFun.prototype.constructor)
+    console.log(b.prototype == myFun.prototype)
+    console.log(b.prototype == a.prototype)
+    console.log(a.prototype)
+    console.log(b.prototype)
+
+
+</script>
+
+</body>
+</html>

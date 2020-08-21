@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            width: 300px;
+        }
+
+        aside {
+            width: 100px;
+            height: 150px;
+            background-color: cyan;
+            float: left;
+        }
+
+        .main {
+            /* overflow: hidden; */
+            /* 设置为BEC布局 */
+            height: 200px;
+            background-color: cornflowerblue;
+        }
+
+        .box {
+            margin: 10px;
+            background: #ff0;
+            width: 500px;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='box'>
+        <aside>元素1 float: left;</aside>
+        <div class="main">
+            overflow: hidden;不清除 元素1 的浮动
+        </div>
+    </div>
+
+    <div class='box'>
+        <aside>元素2 float: left;</aside>
+        <div style='overflow: hidden;' class="main">
+            <!-- <div class="main"> -->
+            overflow: hidden; 清除 元素2 的浮动
+        </div>
+    </div>
+    <div class='box'>
+        <div style="height: 100px;width: 100px;float: left;background: lightblue">我是一个左浮动的元素</div>
+        <div style="width: 200px; height: 200px;background: #eee">
+            没有设置浮动,
+            没有触发 BFC 元素,
+            width: 200px; height:200px; background: #eee;</div>
+    </div>
+    <div class='box'>
+        <div style="height: 100px;width: 100px;float: left;background: lightblue">我是一个左浮动的元素</div>
+        <div style=" overflow: hidden;width: 200px; height: 200px;background: #eee">
+            没有设置浮动,
+            触发 BFC 元素,
+            width: 200px; height:200px; background: #eee;</div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div onclick="alert('button的父div触发了')">
+    <button onclick="alert('行内DOM0级')">测试dom0JS绑定覆盖和dom2注册多个监听</button>
+</div>
+
+<div onclick="alert('解绑了button的父div触发了')">
+    <button onclick="alert('解绑了')">解绑上面div事件绑定和一个监听</button>
+</div>
+
+<div onclick="alert('行内父div触发了')">
+    <button onclick="alert('行内DOM0级')">测试事件冒泡</button>
+</div>
+<script>
+    (function () {
+        /*1.2*/
+        var btn = document.getElementsByTagName('button')[0];
+        /* 2.1 */
+        btn.addEventListener('click', dom2Event);
+        btn.addEventListener('click', dom2Plus);
+        btn.onclick = function () {
+            console.log('jsDOM0级');
+        }
+        function dom2Event() {
+            console.log('DOM2级事件');
+        }
+
+        function dom2Plus() {
+            console.log('DOM2级事件Plus');
+        }
+
+        /* 输出结果：
+         DOM2级事件
+         DOM2级事件Plus
+         jsDOM0级
+         */
+
+        /* 以下代码解绑了DOM0和DOM2事件dom2Plus*/
+        /* 3.1*/
+        var releaseBtn = document.getElementsByTagName('button')[1];
+        releaseBtn.onclick = function (eventobj) {
+            btn.onclick = null;
+            /* 3.2 */
+            btn.removeEventListener('click', dom2Event);
+            //取消事件冒泡的两种方法：
+            // 1）、cancelBubble可以取消事件冒泡；2）、stopPropagation可以取消事件冒泡和下沉
+            eventobj.cancelBubble=true;
+            eventobj.stopPropagation();
+        }
+
+        /* 输出：
+         DOM2级事件Plus
+         */
+    })();
+</script>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    #code {
+      width: 500px;
+      height: 100px;
+    }
+
+    div {
+      height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div> src: <input id='src' value='gerenzhongxin' /></div>
+    <div> appKey: <input id='appKey' value='mapmnp://swan/UdnFfTQh7lwKSE5IxM5okcV55o84sPU' /></div>
+    <div> from: <input id='from' value='1291009910112000' /></div>
+    <div> <button onclick="getCode">生成code</button></div>
+    <textarea id="code"></textarea>
+  </div>
+
+  <script>
+    function getCode() {
+      let src = document.getElementById('src').innerText;
+      let appKey = document.getElementById('appKey').innerText;
+      let from = document.getElementById('from').innerText;
+      let codeHtml = document.getElementById('code');
+
+      let params = {
+        src: src || 'gerenzhongxin',
+        appKey: appKey || 'mapmnp://swan/UdnFfTQh7lwKSE5IxM5okcV55o84sPU'
+      };
+
+      let ft = {
+        "from": from || "1291009910112000",
+        "ext": {}
+      };
+      let url = `${params.appKey}/?_baiduboxapp=${encodeURIComponent(JSON.stringify(ft))}`;
+      console.log('url', url);
+      let res = `baidumap://map/mnp?src=${params.src}&url=${encodeURIComponent(url)}`
+      console.log('res', res);
+      codeHtml.innerHTML = res;
+      return res;
+      // baidumap://map/mnp?src=gerenzhongxin&url=mapmnp%3A%2F%2Fswan%2FUdnFfTQh7lwKSE5IxM5okcV55o84sPU%2F%3F_baiduboxapp%3D%255Bobject%2520Object%255D
+    }
+    getCode();
+  </script>
+
+</body>
+
+</html>

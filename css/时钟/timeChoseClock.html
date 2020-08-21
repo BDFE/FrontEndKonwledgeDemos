@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>时钟</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+
+    <div>
+        <div class="pop_container">
+            <div class="pop_container_parent">
+                <div class="click-indicator" onclick="handleClick">
+                    <div>
+                        <span>1</span>
+                    </div>
+                    <div>
+                        <span>2</span>
+                    </div>
+                    <div>
+                        <span>3</span>
+                    </div>
+                    <div>
+                        <span>4</span>
+                    </div>
+                    <div>
+                        <span>5</span>
+                    </div>
+                    <div>
+                        <span>6</span>
+                    </div>
+                    <div>
+                        <span>7</span>
+                    </div>
+                    <div>
+                        <span>8</span>
+                    </div>
+                    <div>
+                        <span>9</span>
+                    </div>
+                    <div>
+                        <span>10</span>
+                    </div>
+                    <div>
+                        <span>11</span>
+                    </div>
+                    <div>
+                        <span>12</span>
+                    </div>
+                </div>
+                <div class="clock_time_text">123</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var times = document.getElementsByClassName('click-indicator')[0]
+        times.onclick = (e) => {
+            if (e.target.tagName === "SPAN") {
+                console.log(e.target.innerText)
+            }
+        }
+    </script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(#e7e7e7, #d7d7d7);
+        }
+        /*时钟容器*/
+
+        .pop_container {
+            position: relative;
+            width: 230px;
+            height: 230px;
+            top: 100px;
+            left: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clock_time_text {
+            position: absolute;
+            /* z-index: 1; */
+            width: 100%;
+            height: 100%;
+            /* top: 64%; */
+            /* left: 50%; */
+            background-image: linear-gradient(#e3e3e3, #f7f7f7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .pop_container_parent {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clock-wrapper {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            width: 50px;
+            height: 50px;
+        }
+        /*表盘*/
+
+        .clock-base {
+            width: 50px;
+            height: 50px;
+            background-color: #eee;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #eee;
+        }
+        /*表盘刻度容器*/
+
+        .click-indicator {
+            position: absolute;
+            z-index: 1;
+            width: 230px;
+            height: 230px;
+            border-radius: 50%;
+            border: solid 3px gray;
+            padding: 5px;
+        }
+        /*表盘刻度*/
+
+        .click-indicator div {
+            position: absolute;
+            width: 19px;
+            height: 4px;
+            margin: 112px 108px;
+            background-color: #ddd;
+        }
+
+        .click-indicator div>span {
+            padding: 5px;
+        }
+
+        .click-indicator div :hover {
+            transform: scale(2, 2);
+            cursor: pointer;
+            background: gray;
+        }
+        /*分别设置各个刻度的位置和角度*/
+
+        .click-indicator div:nth-child(1) {
+            transform: rotate(30deg) translateY(-113px);
+        }
+
+        .click-indicator div:nth-child(2)>span {
+            display: inline-block;
+            transform: rotate(-30deg);
+        }
+
+        .click-indicator div:nth-child(2) {
+            transform: rotate(60deg) translateY(-113px);
+        }
+
+        .click-indicator div:nth-child(2)>span {
+            display: inline-block;
+            transform: rotate(-60deg);
+        }
+
+        .click-indicator div:nth-child(3) {
+            transform: rotate(90deg) translateY(-113px);
+            background-color: #aaa;
+        }
+
+        .click-indicator div:nth-child(3)>span {
+            display: inline-block;
+            transform: rotate(-90deg);
+        }
+
+        .click-indicator div:nth-child(4) {
+            transform: rotate(120deg) translateY(-113px);
+        }
+
+        .click-indicator div:nth-child(4)>span {
+            display: inline-block;
+            transform: rotate(-120deg);
+        }
+
+        .click-indicator div:nth-child(5) {
+            transform: rotate(150deg) translateY(-113px);
+        }
+
+        .click-indicator div:nth-child(5)>span {
+            display: inline-block;
+            transform: rotate(-150deg);
+        }
+
+        .click-indicator div:nth-child(6) {
+            transform: rotate(180deg) translateY(-113px);
+            background-color: #aaa;
+        }
+
+        .click-indicator div:nth-child(6)>span {
+            display: inline-block;
+            transform: rotate(-180deg);
+        }
+
+        .click-indicator div:nth-child(7) {
+            transform: rotate(210deg) translateY(-113px);
+        }
+
+        .click-indicator div:nth-child(7)>span {
+            display: inline-block;
+            transform: rotate(-210deg);
+        }
+
+        .click-indicator div:nth-child(8) {
+            transform: rotate(240deg) translateY(-113px);
+        }
+
+        .click-indicator div:nth-child(8)>span {
+            display: inline-block;
+            transform: rotate(-240deg);
+        }
+
+        .click-indicator div:nth-child(9) {
+            transform: rotate(270deg) translateY(-113px);
+            background-color: #aaa;
+        }
+
+        .click-indicator div:nth-child(9)>span {
+            display: inline-block;
+            transform: rotate(-270deg);
+        }
+
+        .click-indicator div:nth-child(10) {
+            transform: rotate(300deg) translateY(-113px);
+        }
+
+        .click-indicator div:nth-child(10)>span {
+            display: inline-block;
+            transform: rotate(-300deg);
+        }
+
+        .click-indicator div:nth-child(11) {
+            transform: rotate(330deg) translateY(-113px);
+        }
+
+        .click-indicator div:nth-child(11)>span {
+            display: inline-block;
+            transform: rotate(-330deg);
+        }
+
+        .click-indicator div:nth-child(12) {
+            transform: rotate(360deg) translateY(-113px);
+            background-color: #c00;
+        }
+
+        .click-indicator div:nth-child(12)>span {
+            display: inline-block;
+            transform: rotate(-360deg);
+        }
+        /*时针*/
+    </style>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>固定-自适应</title>
+</head>
+
+<body>
+  <div id="wrap">
+    <div id="color"></div>
+    <span id="text">固定宽度区</span>
+    <span class="class1">示例文字</span>
+    <span class="class1 class2"></span>放大
+  </div>
+</body>
+
+<style>
+  #wrap {
+    overflow: hidden;
+    *zoom: 1;
+  }
+
+  #color {
+    display: inline-block;
+    width: 25;
+    height: 15;
+    background: red;
+  }
+
+  .class1 {
+    width: 200px;
+    height: 30px;
+    /* line-height: 30px; */
+    display: inline-block;
+    border: 1px solid green;
+    background: red;
+  }
+
+  .class2 {
+  }
+</style>
+
+</html>

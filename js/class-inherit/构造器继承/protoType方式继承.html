@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>apply继承构造器</title>
+</head>
+<body>
+<script>
+    var Animal = function (species="动物",age=0) {
+        this.species = species
+        this.age = age
+    }
+    var Cat = function (name,color) {
+        this.name = name
+        this.color = color
+    }
+    Cat.prototype = new Animal()
+    Cat.prototype.constructor = Cat
+    var cat1 = new Cat("猫 ",3,"cat1","yellow")
+    console.log(cat1)
+</script>
+</body>
+</html>

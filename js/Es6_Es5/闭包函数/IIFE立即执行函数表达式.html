@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IIFE</title>
+</head>
+<body>
+<script>
+    var name = '00'
+    function fun() {
+        console.log(this)
+        console.log(this.name)
+    }
+    var par = {
+        name: "pp",
+        fun: fun
+    }
+    var chi = {
+        name: "cc"
+    }
+    par.fun();
+    console.log( `${chi.hello = par.fun}`);
+    (chi.fun = par.fun)(); //赋值语句有返回值，返回了fun函数，立即执行相当于在window下执行，this指向了window
+    chi.fun()
+//    (chi.fun)()
+
+</script>
+</body>
+</html>

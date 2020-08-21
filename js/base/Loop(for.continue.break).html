@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        'use strict'
+        console.log('break:');
+        for (var i = 519; i < 550; i++) {
+            if (i == 522) {
+                break;
+            }
+            console.log(i);
+            document.write('<br>')
+            document.write(i);
+        }
+        console.log('continue:');
+        for (var i = 5; i >= 0; i--) {
+            if (i == 4 || i == 3 || i == 1) {
+                continue;
+            }
+            console.log(i);
+            document.write('<br>')
+            document.write(i);
+        }
+
+        for (var i = 1; i < 10; i++) {
+            if (i == 8) {
+                // return false;
+            }
+            console.log(i);
+            document.write('<br>')
+            document.write(i);
+        }
+
+        console.log('use strict window === this :');
+        function a() {
+            console.log(window === this)
+        }
+        a();
+    </script>
+</body>
+
+</html>

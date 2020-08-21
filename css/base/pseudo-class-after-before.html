@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+
+</head>
+
+<body>
+<span class="haorooms" data-content="前">前</span>
+<span class="haorooms" data-content="端">端</span>
+<span class="haorooms" data-content="博">博</span>
+<span class="haorooms" data-content="客">客</span>
+<p>
+    You can use the :first-line pseudo-element to add a special effect to the first line of a text!
+    You can use the :first-line pseudo-element to add a special effect to the first line of a text!
+    You can use the :first-line pseudo-element to add a special effect to the first line of a text!
+</p>
+<p>
+    You can use the :first-line pseudo-element to add a special effect to the first line of a text!
+</p>
+<p>
+    You can use the :first-line pseudo-element to add a special effect to the first line of a text!
+</p>
+<div class="border-class">
+    __三行横杠_____
+</div>
+
+<div class="outer">
+    <div class="inner">haorooms内部内容</div>
+    <!--<div class="v">cssHack</div>-->
+</div>
+
+</body>
+<style type="text/css">
+    .haorooms {
+        position:relative;
+        display:inline-block;
+        font-size:80px; /*  任何宽度都可以 */
+        color: black; /* 任何颜色，或透明 */
+        overflow:hidden;
+        white-space: pre; /* 处理空格 */
+        margin: 5px;
+    }
+    .haorooms:before{
+        display:block;
+        z-index:1;
+        position:absolute;
+        top:0;
+        left:0;
+        width: 50%;
+        content: attr(data-content); /* 伪元素的动态获取内容 */
+        overflow:hidden;
+        color: #f00;
+    }
+    p:first-line
+    {
+        color: #ff0000;
+        font-variant: small-caps;
+        letter-spacing:5px;
+        word-spacing:5px
+    }
+    /*nth-child中使用负数，可以选择小于等于某个数的值
+     选择前小于等于2的span
+     */
+    span:nth-child(-n+2){background:green}
+/*
+    :first-letter 	向文本的第一个字母添加特殊样式。 	1
+    :first-line 	向文本的首行添加特殊样式。 	1
+    :before 	在元素之前添加内容。 	2
+    :after 	在元素之后添加内容。
+*/
+    .border-class{
+        width:40px;height:7px;
+        color: #999;
+        border-top:50px double darkblue;
+        border-bottom: 6px dotted green;
+    }
+
+</style>
+
+<!--实现vertical-align-->
+<!--vertical-align 只在行内元素，或者inline、inline-block等中才起作用-->
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .outer {
+        background-color: #ccc;
+        font-size: 24px;
+        height: 350px;
+        text-align: center;
+        overflow: hidden;
+        width: 280px;
+    }
+    .outer  .inner,
+    .outer  .v {
+        display: inline-block;
+        zoom: 1;*display: inline; /* 用于触发支持IE67 inline-block */
+    }
+    .outer  .inner {
+        line-height: 1.8;
+        padding: 0 4px 0 5px;
+        vertical-align: middle;
+        width: 262px;
+    }
+    .outer  .v {
+        line-height: 350px;
+        text-indent:-9999px;
+        width: 1px;
+    }
+</style>
+</html>

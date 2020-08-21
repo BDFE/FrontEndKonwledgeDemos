@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>split_slice_splice</title>
+</head>
+<body>
+<script>
+    console.log("----------------split-----------------")
+    var s = "How do you do";
+    var arr = s.split(''); // 使用 " " 空格来切割字符串
+    document.write(arr.length); // 4
+    document.write(arr); // How,do,you,do
+    console.log(arr); // How,do,you,do
+
+    console.log("----------------splice-----------------")
+
+    //    splice()方法向/从数组中添加/删除元素，然后返回被删除的元素组成的数组。
+    //    arr.splice(index, howmany, item1,…, itemX)
+    //    index 	必需。整数，规定了添加/删除元素的位置，使用负数可从数组结尾处规定位置。
+    //    howmany 	必需。要删除的元素的数量。如果设置为0，则不会删除元素。如果添加元素则这里应该设置为0.
+    //            itemX 	可选。向数组添加的新项目。在添加的时候用。
+    //    注意：这个方法会对原数组做出修改。获得的也是新数组。
+    var arr1 = ["a", "b", "c", "d", "e", "f"]; //因为第2参数为0，所以表示添加元素：从下标为1的位置插入元素。其余的元素会自动向后移动
+    var v = arr1.splice(1, 1, "m", "n"); // 因为是添加元素，所以返回的数组长度为 0
+    console.log(v.length); // 0
+    console.log(arr1); // a,m,n,b,c,d,e,f
+
+    console.log("----------------slice-----------------")
+    //    slice()方法主要用于截取数组，并返回截取到的新数组。
+    //    数组和字符串对象均可以使用。
+    //    arr.slice(start, end)
+    var arr1 = ["a", "b", "c", "d", "e", "f"];
+    // 从下标为0的位置开始截取，截取到下标2，但是不包括下标为2的元素. 原数组没有任何的变化
+    var newArr = arr1.slice(0, 2);
+    console.log(newArr);// a, b
+    console.log(arr1.slice(1, 4)); // b,c,d
+    //从下标为2的元素开始截取，一直到最后一个元素
+    console.log(arr1.slice(2));  //c,d,e,f
+    //从倒数第5个元素，截取到倒数第2个
+    console.log(arr1.slice(-5, -2)); // b c d
+</script> <script type="text/javascript">
+    //如果不传入参数二，那么将从参数一的索引位置开始截取，一直到数组尾
+    var a=[1,2,3,4,5,6];
+    var b=a.slice(0,3);  //[1,2,3]
+    var c=a.slice(3);    //[4,5,6]
+    //如果两个参数中的任何一个是负数，array.length会和它们相加，试图让它们成为非负数，举例说明：
+    //当只传入一个参数，且是负数时，length会与参数相加，然后再截取
+    var a=[1,2,3,4,5,6];
+    var b=a.slice(-1);  //[6]
+    //当只传入一个参数，是负数时,并且参数的绝对值大于数组length时，会截取整个数组
+    var a=[1,2,3,4,5,6];
+    var b=a.slice(-6);  //[1,2,3,4,5,6]
+    var c=a.slice(-8);  //[1,2,3,4,5,6]
+    //当传入两个参数一正一负时，length也会先于负数相加后，再截取
+    var a=[1,2,3,4,5,6];
+    var b=a.slice(2,-3);  //[3]
+    //当传入一个参数，大于length时，将返回一个空数组
+    var a=[1,2,3,4,5,6];
+    var b=a.slice(6);　　//[]
+</script>
+</body>
+</html>

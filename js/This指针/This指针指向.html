@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var name = "outer name"
+    var obj = {
+        name : "inner-daniel",
+            fun1:function () {
+        console.log(this.name)
+    }
+    }
+    obj.fun1()
+
+    console.log("-------------------------------------------------------")
+    var name2 = "outer name2 "
+    var obj2 = {
+        name2 : "inner-name2",
+        fun1:function () {
+            console.log(this.name2)
+        },
+        fun2:function () {
+            var aa = this.fun1
+            aa()
+        }
+    }
+    obj2.fun2()
+
+    console.log("****************************************")
+    function funName() {
+        this.oneName ="constructor name use this.name"
+    }
+    funName.prototype.oneName="prototype name"
+    var testFun = new funName()
+    testFun.oneName="set name"
+    console.log(testFun.oneName) // set name
+    console.log(testFun.__proto__) //    "prototype name"
+
+</script>
+</body>
+</html>
