@@ -79,6 +79,7 @@ class AMAP extends HTMLElement {
 
   initProperties() {
     this.version = '2.0'
+    // this.version = '1.4.15'
     this.key = '899df86dd010c849dd479892c63c7baa'
     this.option = {
       zoom: "4.7",
