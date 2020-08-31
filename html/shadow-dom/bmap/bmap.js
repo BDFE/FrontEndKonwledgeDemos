@@ -4,9 +4,6 @@ class BMAP extends HTMLElement {
     this.mapProperties = ['id', 'key', 'version', 'zoom', 'center'];
     const shadowRoot = this.attachShadow({ mode: 'open' });
     shadowRoot.innerHTML = `<div id=map-container> 
-    </div>
-    // <style id=inlinestyles>
-    // </style>
     <slot ></slot> 
        `;
     this.initDomStyle()

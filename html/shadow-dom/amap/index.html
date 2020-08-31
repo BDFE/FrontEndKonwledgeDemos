@@ -1,114 +1,40 @@
 <!doctype html>
-<html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, shrink-to-fit=no">
-  <script
-    src="//webapi.amap.com/maps?v=1.4.15&key=899df86dd010c849dd479892c63c7baa&plugin=Map3D,AMap.DistrictSearch"></script>
-  <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=wydmYg51LXqtUDpwkBkQj13C0KepuWrx"></script>
-  <title> amap component</title>
+  <title> amap web component</title>
   <script src="amap.js"></script>
-  <script src="bmap.js"></script>
+  <script src="amap-points.js"></script>
   <style>
+    body {
+      margin: 0px;
+    }
+
     .map-wraper {
-      background: red;
-      /* padding: 20px; */
-      width: 400px;
-      height: 300px;
-      display: inline-block;
-      border: 3px dashed black;
-      padding: 20px;
-    }
-
-    #map {
-      width: 400px;
-      display: inline-block;
-      height: 300px;
-      border: 4px solid green;
-    }
-
-    #b-map {
-      width: 400px;
-      display: inline-block;
-      height: 300px;
-      border: 4px solid green;
-    }
-
-    .shadow-dom {
-      background: black;
-      padding: 50px;
+      width: 100%;
+      height: 600px;
     }
 
     #a-map {
-      width: 400px;
-      display: inline-block;
-      height: 300px;
-      border: 4px solid green;
-    }
-
-    a-map,
-    b-map {
-      width: 100%;
-      height: 100%;
+      width: 600px;
+      height: 400px;
     }
   </style>
 </head>
 
 <body>
-  <!-- <div id="a-map">
-    my map
-  </div>
-  <div id="b-map">
-    my baidu map
-  </div> -->
-  <div class="shadow-dom">
-    <!-- <div class="map-wraper">
-      <a-map>
-      </a-map>
-    </div> -->
-    <div onclick="onContainerClick()" class="map-wraper">
-      <b-map onclick="onElClick()" onmapclick="onBMapClick()" onmapmousemove="onBMapMouseMove()">
-      </b-map>
-    </div>
+  <div class="map-wraper">
+    <a-map version='"1.4.15"' zoom='16' key='"899df86dd010c849dd479892c63c7baa"'
+      option='{"zoom":4.7,"viewMode":"3D","pitch":0,"center":[106.346291,37.100257],"mapStyle":"amap://styles/grey"}'
+      onmapclick="onMapClick()" onmapmousemove="onMapMouseMove()">
+      <amap-points data='[[116.404,39.915]]' />
+    </a-map>
   </div>
 </body>
 <script>
-  var amap = new AMap.Map('a-map', {
-    zoom: 10,
-    viewMode: '3D',
-    pitch: 0,
-    center: [106.346291, 37.100257],
-    // showLabel: false,
-    // mapStyle: 'amap://styles/grey',
-  });
-</script>
-<script>
-  var bmap = new BMap.Map("b-map");    // 创建Map实例
-  var point = new BMap.Point(116.404, 39.915); // 创建点坐标
-  bmap.centerAndZoom(point, 15);
-  bmap.enableScrollWheelZoom();
-  document.body.addEventListener('click', () => {
-    console.log('click');
-  })
-  document.body.addEventListener('mapclick', () => {
-    console.log('mapclick');
-  })
-  document.body.addEventListener('mapclick', () => {
-    console.log('mapclick');
-  })
-  function onContainerClick(e) {
-    console.log('onContainerClick', e)
+  function onMapClick() {
+    console.log('onMapClick')
   }
-  function onBMapClick(e) {
-    console.log('onBMapClick', e)
-  }
-  function onBMapMouseMove(e) {
-    console.log('onBMapMouseMove', e)
-  }
-  function onElClick() {
-    console.log('onBMapMousemove')
+  function onMapMouseMove() {
+    console.log('onMapMouseMove')
   }
 </script>
 
