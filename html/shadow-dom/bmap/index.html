@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, shrink-to-fit=no">
+  <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=wydmYg51LXqtUDpwkBkQj13C0KepuWrx"></script>
+  <title> amap component</title>
+  <script src="bmap.js"></script>
+  <script src="bmap-points.js"></script>
+  <style>
+    .map-wraper {
+      /* background: red; */
+      /* padding: 20px; */
+      width: 400px;
+      height: 300px;
+      display: inline-block;
+      border: 3px dashed black;
+      padding: 20px;
+    }
+
+    #out-map {
+      width: 400px;
+      display: inline-block;
+      height: 300px;
+      border: 4px solid green;
+    }
+
+    .shadow-dom {
+      background: black;
+      padding: 50px;
+    }
+
+    baidu-map {
+      width: 100%;
+      height: 100%;
+    }
+
+    #custom-map-var {
+      /* --background: #00f; */
+      --border: 5px dashed #f00;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="out-map">
+    my baidu map
+  </div>
+  <div class="map-wraper">
+    <baidu-map id='custom-map-var' zoom="15" center="[106.346291, 37.100257]" pitch="0" background="'#0f0'"
+      showLabel="true" onclick="onElClick()" onmapclick="onBMapClick()" onmapmousemove="onBMapMouseMove()">
+      <div slot>
+        out slot context
+      </div>
+      <bmap-points fillColor='{"fillColor":"#0f0"}' data='[[116.404,39.915]]' fitview='true' />
+    </baidu-map>
+  </div>
+</body>
+<script>
+  var bmap = new BMap.Map("out-map");    // 创建Map实例
+  var point = new BMap.Point(116.404, 39.915); // 创建点坐标
+  bmap.centerAndZoom(point, 15);
+  bmap.enableScrollWheelZoom();
+  document.body.addEventListener('click', () => {
+    const b = document.getElementById('custom-map-var')
+    b.zoom = 3;
+    console.log('click', b.zoom)
+  })
+  document.body.addEventListener('mapclick', () => {
+
+  })
+  document.body.addEventListener('mapclick', () => {
+
+  })
+  function onContainerClick(e) {
+
+  }
+  function onBMapClick(e) {
+
+  }
+  function onBMapMouseMove(e) {
+
+  }
+  function onElClick() {
+
+  }
+</script>
+
+</html>

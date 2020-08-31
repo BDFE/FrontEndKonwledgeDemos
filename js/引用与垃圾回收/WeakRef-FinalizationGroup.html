@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #code {
+            width: 500px;
+            height: 100px;
+        }
+
+        div {
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+    </div>
+
+    <script>
+        // 以下三点是Map和WeakMap的主要区别： 
+        // 1.Map对象的键可以是任何类型，但WeakMap对象中的键只能是对象引用 
+        // 2.WeakMap不能包含无引用的对象，否则会被自动清除出集合（垃圾回收机制）。
+        // 3.WeakSet对象是不可枚举的，无法获取大小
+        
+        // JavaScript 的 WeakMap 并不是真正意义上的弱引用：实际上，只要键仍然存活，它就强引用其内容。
+        // WeakMap 仅在键被垃圾回收之后，才弱引用它的内容。这种关系更准确地称为 ephemeron 。
+
+
+        const cache = new Map();
+        const finalizationGroup = new FinalizationGroup((iterator) => {
+            for (const name of iterator) {
+                const ref = cache.get(name);
+                if (ref !== undefined && ref.deref() === undefined) {
+                    cache.delete(name);
+                }
+            }
+        });
+
+        function getImageCached(name) {
+            const ref = cache.get(name); // 1
+            if (ref !== undefined) { // 2
+                const deref = ref.deref();
+                if (deref !== undefined) return deref;
+            }
+            const image = performExpensiveOperation(name); // 3
+            const wr = new WeakRef(image); // 4
+            cache.set(name, wr); // 5
+            finalizationGroup.register(image, name); // 6
+            return image; // 7
+        }
+    </script>
+
+</body>
+
+</html>

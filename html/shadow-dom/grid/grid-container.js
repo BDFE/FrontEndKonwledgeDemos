@@ -75,7 +75,7 @@ class GridContainer extends GridElement {
   attributeChangedCallback(name, oldVal, newVal) {
     // removes last semicolon
     newVal = newVal.replace(/;([\s]+)?$/, '');
-
+    console.log('attr change', name, newVal)
     if (newVal.includes(';')) {
       this.setMediaQueries(name, newVal);
     } else {

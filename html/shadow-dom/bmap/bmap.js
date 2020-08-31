@@ -2,18 +2,18 @@ class BMAP extends HTMLElement {
   constructor() {
     super();
     this.mapProperties = ['id', 'key', 'version', 'zoom', 'center'];
-    const shadowRoot = this.attachShadow({ mode: 'open', delegatesFocus: true });
-    shadowRoot.innerHTML = `<div id=map-container> <slot>默认插槽</slot> 
+    const shadowRoot = this.attachShadow({ mode: 'open' });
+    shadowRoot.innerHTML = `<div id=map-container> 
     </div>
-    <style id=inlinestyles></style>
+    // <style id=inlinestyles>
+    // </style>
+    <slot ></slot> 
        `;
     this.initDomStyle()
     this.initProperties();
     this.initMap();
   }
-  attributeChangedCallback(name, oldVal, newVal) {
-    // 属性添加、移除、更新或替换。解析器创建元素时，或者升级时，也会调用它来获取初始值。
-  }
+
   adoptedCallback() {
     // 自定义元素被移入新的 document（例如，有人调用了 document.adoptNode(el)）
   }
@@ -22,19 +22,32 @@ class BMAP extends HTMLElement {
     // this.addEventListener("mapclick", function (e) {
     //   
     // });
+    this.setSlotAttributes()
   }
   disconnectedCallback() {
     // 元素每次从 DOM 中移除时都会调用。用于运行清理代码（例如移除事件侦听器等）
   }
+  static get observedAttributes() {
+    return ['option', 'pitch', 'zoom', 'center', 'border', 'background'];
+  }
+  attributeChangedCallback(name, oldVal, newVal) {
+    // 属性添加、移除、更新或替换。解析器创建元素时，或者升级时，也会调用它来获取初始值。
+
+  }
+
   initDomStyle() {
     const myStyles = `
       #map-container {
         width:100%;
         height:100%;
-        background:#ff0;
+        box-sizing:border-box;
+        background: var(--background, #000);
+        border: var(--border, 10px solid #000);
       }
-      // body{
-      //   margin:0px;
+      // :host([background]) {
+      // }
+      // :host([border]) {
+      //   border: var(--border, 10px solid #f00);
       // }
     `;
     const styleSheet = new CSSStyleSheet();
@@ -43,6 +56,23 @@ class BMAP extends HTMLElement {
     if (myStyles && styleTag) {
       styleTag.innerHTML = myStyles;
     }
+  }
+  setSlotAttributes() {
+    let tabs = [];
+    let children = this.shadowRoot.children;
+    // 
+    setTimeout(() => {
+      const sel = this.querySelectorAll('bmap-points');
+
+      //  children.map(el => {
+      //   el.setAttribute('map', this.map)
+      // })
+    }, 1000)
+    // for (let elem of children) {
+    //   if (elem.getAttribute('part')) {
+    //     tabs.push(elem);
+    //   }
+    // }
   }
 
   initProperties() {
@@ -72,10 +102,10 @@ class BMAP extends HTMLElement {
 
   async initMap() {
     await this.loadJs();
-
+    const self = this;
     this.mapContainer = this.shadowRoot.getElementById('map-container');
     this.mapContainer.addEventListener('click', () => {
-      
+
       this.dispatchEvent(new CustomEvent('click', {
         bubbles: true,
         composed: true,
@@ -87,19 +117,25 @@ class BMAP extends HTMLElement {
         detail: "mapclick"
       }));
     })
- 
 
     let map = this.map = new BMap.Map(this.mapContainer);
+
+    setTimeout(() => {
+      self.setChildrenMap(map);
+    }, 1000)
     var point = new BMap.Point(116.404, 39.915); // 创建点坐标
     map.centerAndZoom(point, 15);
     map.enableScrollWheelZoom();
-    this.shadowRoot.dispatchEvent(new CustomEvent('loaded', {
+    this.shadowRoot.dispatchEvent(new CustomEvent('mapload', {
       bubbles: true,
       composed: true,
-      detail: "composed"
+      detail: {
+        map: map,
+      }
     }));
+
+
     this.map.addEventListener("mousemove", (e) => {
-      
       this.shadowRoot.dispatchEvent(new CustomEvent('mapmousemove', {
         bubbles: true,
         composed: true,
@@ -107,12 +143,25 @@ class BMAP extends HTMLElement {
       }));
     })
   }
-  async loadJs() {
 
+
+
+
+  setChildrenMap(map) {
+    // let node = this.shadowRoot.querySelector(`#bmap-${attrName}`);
+    const slot = this.shadowRoot.querySelector('slot');
+    const layers = this.querySelectorAll('bmap-points')
+    console.log('root', slot, layers);
+    Array.from(layers).map(l => {
+      l.setMap(map)
+    })
+
+    // root.data.text = { name: 'son' }
+  }
+  async loadJs() {
     return new Promise((resolve, reject) => {
       try {
         window.onBMapJsLoad = function () {
-
           resolve();
         }
         // var url = `https://webapi.amap.com/maps?v=${this.version}&key=${this.key}&callback=onBMapJsLoad`;
@@ -131,4 +180,4 @@ class BMAP extends HTMLElement {
 
   }
 }
-customElements.define('b-map', BMAP);
+customElements.define('baidu-map', BMAP);

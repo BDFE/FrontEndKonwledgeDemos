@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #code {
+            width: 500px;
+            height: 100px;
+        }
+
+        div {
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+    </div>
+
+    <script>
+        function testMap(n = 1000) {
+            let m = new Map();
+            let o = {};
+            for (let i = 0; i < n; i++) {
+                o[`key-${i}`] = {
+                    [i]: Math.random()
+                }
+            }
+            Object.keys(o).map(k => {
+                m.set(o[k], { 1: 1 })
+            })
+            for (let i = 0; i < n; i++) {
+                delete o[`key-${i}`];
+            }
+            setInterval(() => {
+                console.log('map', o, m)
+            }, 1000)
+        }
+
+        function testWeakMap(n = 1000) {
+            let m = new WeakMap();
+            let o = {};
+            for (let i = 0; i < n; i++) {
+                o[`key-${i}`] = {
+                    [i]: Math.random()
+                }
+            }
+            Object.keys(o).map(k => {
+                m.set(o[k], { 1: 1 })
+            })
+            for (let i = 0; i < n; i++) {
+                delete o[`key-${i}`];
+            }
+            setInterval(() => {
+                console.log('weak', o, m)
+            }, 1000)
+        }
+
+        testMap();
+        testWeakMap();
+
+
+    </script>
+
+</body>
+
+</html>
