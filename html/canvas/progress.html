@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src='./util.js'>
+    </script>
+
+</head>
+
+<body>
+
+    <canvas id="canvas8" height="100" width="600" style="margin-top:100px;border:1px solid #fff;"></canvas>
+    <script>
+        class Player {
+            ratio = 1;
+            constructor() {}
+
+        }
+        let ratio = 1;
+
+        function initCanvasCtx(canvas) {
+            let ctx = null;
+            if (canvas.getContext) {
+                ctx = canvas.getContext('2d');
+                ratio = getPixelRatio(ctx);
+
+                canvas.style.width = canvas.width + 'px';
+                canvas.style.height = canvas.height + 'px';
+                canvas.width = canvas.width * ratio;
+                canvas.height = canvas.height * ratio;
+                // ctx.scale(ratio, ratio);
+            }
+
+            return ctx
+        }
+
+        const canvas = document.getElementById('canvas8');
+        const ctx = initCanvasCtx(canvas);
+
+        const opt = {
+            background: '#37373D',
+            dot: {
+                color: '#5C5C66',
+                radius: 5,
+                borderWidth: 1,
+                hoverColor: '#f00'
+            },
+            button: {
+                radius: 20,
+                color: '#1288FF',
+                pause: true
+            },
+            gap: 5,
+            padding: 5,
+            lineColor: '#5C5C66',
+            lineWidth: 2,
+            progressColor: '#5C5C66',
+            fontColor: '#fff',
+            fontSize: 12,
+        }
+        const data = {
+            dots: [0.1, 0.4, 0.5, 0.8, 0.9],
+            progress: 0.3,
+            hoverDot: 0.3,
+        }
+
+        if (ctx) {
+            draw();
+            canvas.addEventListener('mousemove', e => {
+
+                let hoverPos = {
+                    x: e.layerX * ratio,
+                    y: e.layerY * ratio
+                }
+                draw();
+                let oldCursor = canvas.style.cursor;
+                let hoverDot = getNearestDot(hoverPos, 10)
+
+                if (hoverDot) {
+                    drawRing({
+                        x: hoverDot.x,
+                        y: hoverDot.y,
+                        fillColor: opt.background,
+                        borderColor: opt.dot.hoverColor,
+                        borderWidth: opt.dot.borderWidth * ratio,
+                        radius: opt.dot.radius * ratio,
+                    })
+                    canvas.style.cursor = 'pointer'
+                    let text = `${hoverDot.progress}` || '--';
+                    drawText({
+                        text: text,
+                        fontSize: opt.fontSize * ratio,
+                        fontColor: opt.fontColor,
+                        x: hoverDot.x - text.length / 4 * ratio * opt.fontSize,
+                        y: hoverDot.y - opt.fontSize * ratio,
+                    })
+                } else {
+                    canvas.style.cursor = 'cross'
+                }
+            })
+            canvas.addEventListener('click', e => {
+                let hoverPos = {
+                    x: e.layerX * ratio,
+                    y: e.layerY * ratio
+                }
+                draw();
+                let oldCursor = canvas.style.cursor;
+                let lineDot = getLineDot(hoverPos, opt.lineWidth * ratio)
+                let nearDot = getNearestDot(hoverPos, opt.dot.radius * ratio)
+                let dot = nearDot || lineDot
+                if (dot) {
+                    drawRing({
+                        x: dot.x,
+                        y: dot.y,
+                        fillColor: opt.background,
+                        borderColor: opt.dot.hoverColor,
+                        borderWidth: opt.dot.borderWidth * ratio,
+                        radius: opt.dot.radius * ratio,
+                    })
+                    let text = `${dot.progress}` || '--';
+                    drawText({
+                        text: text,
+                        fontSize: opt.fontSize * ratio,
+                        fontColor: opt.fontColor,
+                        x: dot.x - text.length / 4 * ratio * opt.fontSize,
+                        y: dot.y - opt.fontSize * ratio,
+                    })
+                    canvas.style.cursor = 'pointer'
+                } else {
+                    canvas.style.cursor = 'cross'
+                }
+            })
+
+        } else {
+            alert('不支持');
+        }
+
+        function getNearestDot(xy, maxDistance = 10) {
+            let hoverDot = null;
+            for (let i = 0; i < data.dots.length; i++) {
+                let percent = data.dots[i];
+                let x = (canvas.width - ratio * (2 * opt.padding + opt.gap + 2 * opt.button.radius)) * percent + (opt.padding + opt.gap + 2 * opt.button.radius) * ratio;
+                let y = ~~(canvas.height / 2)
+                let dist = Math.sqrt((x - xy.x) ** 2 + (y - xy.y) ** 2)
+                if (dist < maxDistance) {
+                    hoverDot = {
+                        x: x,
+                        y: y,
+                        progress: percent,
+                        index: i
+                    }
+                    break;
+                }
+            }
+            return hoverDot;
+        }
+
+        function getLineDot(xy, maxDistance = 10) {
+            let hoverDot = null;
+            let y = ~~(canvas.height / 2)
+            let dist = Math.abs(xy.y - y)
+            if (dist < maxDistance) {
+                hoverDot = {
+                    x: xy.x,
+                    y: y,
+                }
+            }
+            return hoverDot;
+        }
+
+        function draw(circles = []) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = opt.background;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            drawBgLine({
+                color: opt.lineColor,
+                lineWidth: opt.lineWidth
+            });
+            // drawProgressLine({
+            //     progress: data.progress,
+            //     lineWidth: opt.lineWidth * ratio,
+            //     lineColor: opt.progressColor,
+            // })
+
+            let px = (canvas.width - ratio * (2 * opt.padding + opt.gap + 2 * opt.button.radius)) * data.progress + ratio * (opt.padding + opt.gap + 2 * opt.button.radius);
+            let py = ~~(canvas.height / 2)
+
+            drawPlayButton({
+                x: 50,
+                y: py,
+                fillColor: opt.button.color,
+                radius: opt.button.radius,
+                pause: opt.button.pause
+            });
+
+            drawCircle({
+                x: px,
+                y: py,
+                radius: (opt.dot.radius - opt.dot.borderWidth) * ratio,
+                fillColor: opt.progressColor
+            })
+
+            let text = `${data.progress}`
+            console.log('draw text', text)
+            drawText({
+                text: text,
+                fontSize: opt.fontSize * ratio,
+                fontColor: opt.fontColor,
+                x: px - text.length / 4 * ratio * opt.fontSize,
+                y: py - opt.fontSize * ratio,
+            })
+            let startText = '2020-10-30 12:22'
+            drawText({
+                text: startText,
+                fontSize: opt.fontSize * ratio,
+                fontColor: opt.fontColor,
+                x: (opt.padding + opt.gap + 2 * opt.button.radius) * ratio,
+                y: py + (opt.fontSize * 1.5 + opt.lineWidth) * ratio,
+            })
+            let endText = '2020-11-30 12:22'
+            drawText({
+                text: endText,
+                fontSize: opt.fontSize * ratio,
+                fontColor: opt.fontColor,
+                x: canvas.width - endText.length * opt.fontSize * ratio * 0.45,
+                y: py + (opt.fontSize * 1.5 + opt.lineWidth) * ratio,
+            })
+
+            data && data.dots && data.dots.forEach(per => {
+                let x = (canvas.width - ratio * (2 * opt.padding + opt.gap + 2 * opt.button.radius)) * per + (opt.padding + opt.gap + 2 * opt.button.radius) * ratio;
+                let y = ~~(canvas.height / 2)
+                drawRing({
+                    x: x,
+                    y: y,
+                    fillColor: opt.background,
+                    borderColor: opt.dot.color,
+                    borderWidth: opt.dot.borderWidth * ratio,
+                    radius: opt.dot.radius * ratio,
+                })
+            })
+            circles && circles instanceof Array && circles.forEach(c => {
+                drawRing({
+                    ...c,
+                    fillColor: opt.background,
+                    borderColor: opt.dot.color,
+                    borderWidth: opt.dot.borderWidth * ratio,
+                    radius: opt.dot.radius * ratio,
+                })
+            })
+        }
+
+        function drawRing({
+            x,
+            y,
+            borderColor = '#ccc',
+            fillColor = '#fff',
+            borderWidth = 2,
+            radius = 10,
+        }) {
+            ctx.beginPath();
+            ctx.arc(x, y, (radius - borderWidth), 0, Math.PI * 2, false);
+            ctx.fillStyle = fillColor;
+            ctx.fill();
+
+            ctx.lineWidth = borderWidth;
+            ctx.strokeStyle = borderColor;
+            ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+            ctx.stroke();
+            ctx.closePath()
+        }
+
+        function drawPlayButton({
+            x,
+            y,
+            fillColor = '#1288FF',
+            radius,
+            pause = false,
+        }) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+            ctx.fillStyle = fillColor;
+            ctx.fill();
+            ctx.closePath()
+
+            if (pause) {
+                ctx.beginPath();
+
+                ctx.lineWidth = radius * 0.2
+
+                let x1 = x - radius * 0.3
+                let x2 = x + radius * 0.3
+
+                let y1 = y - radius * 0.5
+                let y2 = y + radius * 0.5
+
+                ctx.moveTo(x1, y1)
+                ctx.lineTo(x1, y2)
+
+                ctx.moveTo(x2, y1)
+                ctx.lineTo(x2, y2)
+
+                ctx.strokeStyle = '#fff'
+
+                ctx.stroke();
+                ctx.closePath()
+            } else {
+                ctx.beginPath();
+                ctx.lineWidth = radius * 0.2
+
+                let x1 = x - radius * 0.3
+                let x2 = x + radius * 0.3
+
+                let y1 = y - radius * 0.5
+                let y2 = y + radius * 0.5
+
+                ctx.moveTo(x1, y1)
+                ctx.lineTo(x2, y)
+                ctx.lineTo(x1, y2)
+                ctx.lineTo(x1, y1)
+
+                ctx.fillStyle = '#fff'
+                ctx.fill();
+
+                ctx.closePath()
+
+            }
+
+        }
+
+        function drawCircle({
+            x,
+            y,
+            fillColor = '#ccc',
+            radius = 5,
+        }) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+            ctx.fillStyle = fillColor;
+            ctx.fill();
+            ctx.closePath()
+        }
+
+        function drawProgressLine(obj) {
+            let x = (canvas.width - ratio * (2 * opt.padding + opt.gap + 2 * opt.button.radius)) * obj.progress + (opt.padding + opt.gap + 2 * opt.button.radius) * ratio;
+            let y = ~~(canvas.height / 2)
+                // 清空画布(每次清空画布重新绘制，才能更新)
+                // 首先绘制背景
+                // 开始绘制绿色线段
+            ctx.beginPath();
+            ctx.lineWidth = obj.lineWidth; // 设置线宽
+            ctx.strokeStyle = obj.lineColor; // 画笔颜色
+            ctx.moveTo((opt.padding + opt.gap + 2 * opt.button.radius) * ratio, y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        function drawText({
+            text,
+            progress = 0,
+            fontSize = 14,
+            fontColor = '#f00',
+            x,
+            y = canvas.height / 2
+        }) {
+            // 开始绘制变动的数字
+            ctx.beginPath();
+            ctx.fillStyle = fontColor;
+            ctx.font = `${fontSize}px serif`;
+            ctx.fillText(text, x, y);
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        /**
+         * 绘制背景灰色线段
+         */
+        function drawBgLine({
+            lineWidth,
+            color = '#ccc'
+        }) {
+            let y = ~~(canvas.height / 2)
+            ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = lineWidth * ratio;
+
+            //开始线
+            ctx.moveTo((opt.padding + opt.gap + 2 * opt.button.radius) * ratio, y - 2 * lineWidth * ratio);
+            ctx.lineTo((opt.padding + opt.gap + 2 * opt.button.radius) * ratio, y + 2 * lineWidth * ratio);
+
+            //结束线
+            ctx.moveTo(canvas.width - (opt.padding) * ratio, y - 2 * lineWidth * ratio);
+            ctx.lineTo(canvas.width - (opt.padding) * ratio, y + 2 * lineWidth * ratio);
+
+            //播放轴
+            ctx.moveTo((opt.padding + opt.gap + 2 * opt.button.radius) * ratio, y);
+            ctx.lineTo((canvas.width - (opt.padding) * ratio), y);
+
+            ctx.stroke();
+            ctx.closePath();
+        }
+    </script>
+
+</body>
+
+</html>
